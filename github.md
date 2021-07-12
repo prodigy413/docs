@@ -28,6 +28,28 @@ pre-commit
 echo "Test"
 ~~~
 
+### Github REST API
+- Link: https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api
+- Samples
+
+~~~
+$ curl https://api.github.com/users/prodigy413
+{
+  "login": "prodigy413",
+..........
+}
+
+$ curl -i https://api.github.com/users/prodigy413
+HTTP/2 200 
+..........
+
+$ curl -s https://api.github.com/users/prodigy413/repos | jq '.[].name'
+"20210602_test"
+"cicd-test"
+..........
+
+~~~
+
 ### Gtihub Actions
 - Link: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
 - Config
