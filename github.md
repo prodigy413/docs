@@ -48,6 +48,10 @@ $ curl -s https://api.github.com/users/prodigy413/repos | jq '.[].name'
 "cicd-test"
 ..........
 
+$ curl -s https://api.github.com/users/prodigy413/repos | jq -r '.[].name'
+20210602_test
+cicd-test
+.........
 ~~~
 
 ### Gtihub Actions
