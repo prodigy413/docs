@@ -6,18 +6,18 @@ https://www.terraform.io/docs/cli/commands/index.html
 https://www.terraform.io/downloads.html
 
 ~~~
-$ wget https://releases.hashicorp.com/terraform/0.15.3/terraform_0.15.3_linux_amd64.zip
+$ wget https://releases.hashicorp.com/terraform/1.0.2/terraform_1.0.2_linux_amd64.zip
 
-$ unzip terraform_0.15.3_linux_amd64.zip
-Archive:  terraform_0.15.3_linux_amd64.zip
+$ unzip terraform_1.0.2_linux_amd64.zip
+Archive:  terraform_1.0.2_linux_amd64.zip
   inflating: terraform               
 
-$ rm -rf terraform_0.15.3_linux_amd64.zip 
+$ rm -rf terraform_1.0.2_linux_amd64.zip
 
 $ sudo mv terraform /usr/local/bin/
 
 $ terraform version
-Terraform v0.15.3
+Terraform v1.0.2
 on linux_amd64
 
 ~~~
