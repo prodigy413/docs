@@ -17,3 +17,12 @@ xxx.GET["name"]
 xxx.GET.get("name")
 xxx.GET.getlist("name")
 ~~~
+
+- settings
+
+~~~python
+from django.conf import settings
+
+if settings.DEBUG:
+    do_some_logging()
+~~~
