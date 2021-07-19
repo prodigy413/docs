@@ -388,7 +388,7 @@ jobs:
           cat /etc/os-release
 ~~~
 
-~~~
+~~~yaml
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -408,6 +408,55 @@ jobs:
           cat /etc/os-release
 ~~~
 
+~~~yaml
+jobs: 
+  node-docker:
+    runs-on: ubuntu-latest
+    container:
+      image: node:13.5.0-alpine3.10
+    steps:
+      - name: Log node version
+        run: |
+          node -v
+          cat /etc/os-release
+      - name: Step with docker
+        uses: docker://node:12.14.1
+        with:
+          entrypoint: ['/bin/echo', 'Hello']
+          #entrypoint: '/bin/echo'
+          #args: 'Hello'
 ~~~
 
+~~~yaml
+jobs: 
+  node-docker:
+    runs-on: ubuntu-latest
+    container:
+      image: node:13.5.0-alpine3.10
+    steps:
+      - name: Log node version
+        run: |
+          node -v
+          cat /etc/os-release
+      - uses: actions/checkout@v1
+      - name: Run a script
+        uses: docker://node:12.14.1
+        with:
+          entrypoint: ./script.sh
+~~~
+
+- Slack
+
+~~~yaml
+jobs: 
+  node-docker:
+    runs-on: ubuntu-latest
+    container:
+      image: node:13.5.0-alpine3.10
+    steps:
+      - name: Send a slack message
+        uses: docker://technosophos/slack-notify
+        env:
+          SLACK_WEBHOOK: 'https://hooks.slack.com/services/xxxxx' or ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_MESSAGE: "Test Message"
 ~~~
