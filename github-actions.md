@@ -128,7 +128,8 @@ on:
   #   - cron: "0/6 * * * *" 
 ~~~
 
-- Branches, Tags, Paths, cron
+- Branches, Tags, Paths, cron<br>
+Pattern Link: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet
 
 ~~~yaml
 on:
