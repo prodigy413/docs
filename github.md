@@ -103,6 +103,14 @@ If I want to pick a range:
 git cherry-pick <oldest_commit_hash>^..<newest_commit_hash>
 ~~~
 
+### Sample
+
+~~~
+$ git init
+$ git remote add origin git@github.com:aaaaaa
+$ git remote -v
+~~~
+
 ### Set pre-commit
 - Link: https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks
 - Config
