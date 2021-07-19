@@ -263,3 +263,17 @@ jobs:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
 ~~~
+
+- Function<br>
+Link: https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#functions
+
+
+- If<br>
+Link: https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions
+
+- Continue on error & Timeout<br>
+
+
+
+
+
