@@ -126,9 +126,15 @@ on:
   # schedule:
   #   - cron: "0/5 * * * *"
   #   - cron: "0/6 * * * *" 
-  # push:
-  # pull_request:
-  #   types: [closed, assigned, opened, reopened]
+~~~
+
+- Branches, Tags, Paths, cron
+
+~~~yaml
+on:
+  schedule:
+    - cron: "0/5 * * * *"
+  #   - cron: "0/6 * * * *" 
 ~~~
 
 - Variables
