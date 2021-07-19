@@ -267,13 +267,147 @@ jobs:
 - Function<br>
 Link: https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#functions
 
+~~~yaml
+jobs:
+  functions: 
+    runs-on: ubuntu-16.04
+    steps:
+      - name: dump
+        run: |
+          echo ${{ contains( 'hello', '11' ) }}
+          echo ${{ startsWith( 'hello', 'he' ) }}
+          echo ${{ endsWith( 'hello', '1o' ) }}
+          echo ${{ format( 'Hello {0} {1} {2}', 'World', '!', '!' ) }}
+~~~
 
 - If<br>
 Link: https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions
 
+~~~yaml
+  one:
+    runs-on: ubuntu-16.04
+    if: github.event_name == 'push'
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: eccho "$GITHUB_CONTEXT"
+      - name: Dump job context
+        if: failure()
+~~~
+
 - Continue on error & Timeout<br>
 
+~~~yaml
+jobs:
+  run-shell-command:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: echo a string
+        run: echo "Hello World"
+        timeout-minutes: 0 # Default: 360s
+        continue-on-error: true
+~~~
 
+- Matrix
 
+~~~yaml
+### 3 OS & 3 Node version = will run 9 times
+name: Matrix 
+on: push 
 
+jobs: 
+  node-version:
+    strategy: 
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest] 
+        node_version: [6, 8, 10]
+      #max-parallel: 2  
+      #fail-fast: true # If one of them fails, all jobs will stop 
+    runs-on: ${{ matrix.os }}
+    steps: 
+      - name: Log node version 
+        run: node -v
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node_version }}
+      - name: Log node version 
+        run: node -v
+~~~
 
+~~~yaml
+name: Matrix 
+on: push 
+
+jobs: 
+  node-version:
+    strategy: 
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest] 
+        node_version: [6, 8, 10]
+        include: 
+          - os: ubuntu-latest # When os = ubuntu, verion 8, set variable(is_ubuntu_8: "true")
+            node_version: 8
+            is_ubuntu_8: "true"
+        exclude:
+          - os: ubuntu-latest # Skip when ubuntu and version 6
+            node_version: 6
+          - os: macos-latest
+            node_version: 8
+    runs-on: ${{ matrix.os }}
+    env: 
+      IS_UBUNTU_8: ${{ matrix.is_ubuntu_8 }}
+    steps: 
+      - name: Log node version 
+        run: node -v
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node_version }}
+      - name: Log node version 
+        run:  | 
+          node -v
+          echo $IS_UBUNTU_8
+~~~
+
+- Docker<br>
+Link: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idcontainer
+
+~~~yaml
+name: Container
+on: push
+
+jobs: 
+  node-docker:
+    runs-on: ubuntu-latest
+    container:
+      image: node:13.5.0-alpine3.10
+    steps:
+      - name: Log node version  
+        run: |
+          node -v
+          cat /etc/os-release
+~~~
+
+~~~
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      app:
+        image: prodigy413/test:1.0
+        port:
+          - 80:80
+      db:
+        image: sql
+        ports:
+          - 123:123
+    steps:
+      - name: Log node version  
+        run: |
+          node -v
+          cat /etc/os-release
+~~~
+
+~~~
+
+~~~
