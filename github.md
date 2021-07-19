@@ -9,7 +9,98 @@ $ sudo apt update
 $ sudo apt install git
 $ git --version
 git version 2.32.0
+~~~
 
+### 11 main git commands
+- Link: https://dev.to/domagojvidovic/11-git-commands-i-use-every-day-43eo<br>
+
+~~~
+1. Checking out a new branch
+Obviously, I must use a new branch for every task I start:
+git checkout -b <new_branch_name>
+This command creates a new branch and automatically sets it as active.
+
+2. Selecting files for commit
+This is one of the rare cases where I prefer GUI. In VS Code (or any other better IDE/text editor), you can easily see the updated files and select the ones you want to include in the commit.
+
+But in case you want to do it with the CLI:
+git add .
+This command will stage all changed files.
+
+If you want to select a single file:
+git add <path/to/file>
+3. Making a commit
+After you stage some files, you need to commit them:
+git commit -m "Some changes"
+In case you have some pre-commit rules turned on which doesn't allow you to make a commit (like linting), you can override them by passing the --no-verify flag:
+git commit -m "Some changes" --no-verify
+4. Revert all changes
+Sometimes, I experiment with the code. A bit later, I realize that it's not the right path and I need to undo all of my changes.
+
+One simple command for that is:
+git reset --hard
+5. See the latest commits
+I can easily see what's going on on my branch by typing:
+git log
+I can see the commit hashes, messages, authors, and dates.
+
+6. Pulling the changes from the remote branch
+When I checkout an already existing branch (usually main or development), I need to fetch and merge the latest changes.
+
+There is a shorthand for that:
+git pull
+Sometimes, if you're in one of your newly created branches, you'll also need to specify the origin branch:
+git pull origin/<branch_name>
+7. Undoing a local, unpushed commit
+I made a commit. Damn! Something's wrong here. I need to make one more change.
+
+No worries:
+git reset --soft HEAD~1
+This command will revert your last commit and keep the changes you made.
+
+HEAD~1 means that your head is pointing on one commit earlier than your current - exactly what you want.
+
+8. Undoing a pushed commit
+I made some changes and pushed them to remote. Then, I realized it's not what I want.
+
+For this, I use:
+git revert <commit_hash>
+Be aware that this will be visible in your commit history.
+
+9. Stashing my changes
+I'm in the middle of the feature, and my teammate pings me for an urgent code review.
+
+I obviously don't want to trash my changes, neither I want to commit them. I don't want to create a bunch of meaningless commits.
+
+I only want to check his branch and return to my work.
+
+To do so:
+// stash your changes
+git stash
+// check out and review your teammate's branch
+git checkout <your_teammates_branch>
+... code reviewing
+// check out your branch in progress
+git checkout <your_branch>
+// return the stashed changes
+git stash pop
+pop seems familiar here? Yep, this works like a stack.
+
+Meaning, if you do git stash twice in a row without git stash pop in between, they will stack onto each other.
+
+10. Reseting your branch to remote version
+I messed something up. Some broken commits, some broken npm installs.
+
+Whatever I do, my branch is not working well anymore.
+
+The remote version is working fine. Let's make it the same!
+git fetch origin
+git reset --hard origin/<branch_name>
+11. Picking commits from other branches
+Sometimes, I want to apply the commits from the other branches. For this, I use:
+git cherry-pick <commit_hash> 
+If I want to pick a range:
+git cherry-pick <oldest_commit_hash>^..<newest_commit_hash>
 ~~~
 
 ### Set pre-commit
