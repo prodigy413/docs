@@ -73,6 +73,15 @@ https://docs.github.com/en/actions/reference/workflow-commands-for-github-action
        run: echo 'The FOO is' ${{ steps.run1.outputs.FOO }}
 ~~~
 
+- Trigger setting<br>
+https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+
+~~~yaml
+on:
+  pull_request:
+    types: [closed, assigned]
+~~~
+
 - Trigger manually<br>
 https://docs.github.com/en/rest/reference/repos#create-a-repository-dispatch-event
 
@@ -163,7 +172,7 @@ jobs:
           echo "STEP_ENV: ${STEP_ENV}"
 ~~~
 
-~~~
+~~~yaml
 jobs: 
   create_issue:
     runs-on: ubuntu-latest
@@ -200,7 +209,7 @@ jobs:
 
 - Decrypt
 
-~~~
+~~~yaml
 jobs:
   decrypt:
     runs-on: ubuntu-latest
@@ -216,7 +225,7 @@ jobs:
 
 - Context
 
-~~~
+~~~yaml
 jobs:
   one:
     runs-on: ubuntu-16.04
