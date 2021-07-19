@@ -231,7 +231,8 @@ jobs:
 ~~~
 
 - Context<br>
-Link: 
+Link: https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions
+
 ~~~yaml
 jobs:
   one:
