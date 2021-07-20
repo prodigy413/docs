@@ -22,3 +22,10 @@ $ stress-ng -m 1 --vm-bytes 1G --timeout 10
 ### Use Disk 2G
 $ stress-ng -d 1 --hdd-bytes 2G
 ~~~
+
+### pip
+- Create requirements.txt
+
+~~~
+$ pip freeze > requirements.txt
+~~~
