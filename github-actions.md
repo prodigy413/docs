@@ -460,3 +460,67 @@ jobs:
           SLACK_WEBHOOK: 'https://hooks.slack.com/services/xxxxx' or ${{ secrets.SLACK_WEBHOOK }}
           SLACK_MESSAGE: "Test Message"
 ~~~
+
+### Artifact
+- Link:<br>
+https://github.com/actions/upload-artifact<br>
+https://github.com/actions/download-artifact<br>
+https://docs.github.com/en/actions/guides/storing-workflow-data-as-artifacts
+
+~~~yaml
+jobs:
+  test-1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Test
+        run: |
+          echo hello > world.txt
+          cat world.txt
+      - name: Test artifact
+        uses: actions/upload-artifact@v2 # Upload artifacts to github.
+        with:
+          name: world.txt
+          path: ${{ github.workspace }}
+
+  test-2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: world.txt
+          path: ${{ github.workspace }} # Download artifacts from github to directory on ubuntu.
+
+      - name: Run Test
+        run: |
+          cat world.txt
+~~~
+
+~~~yaml
+jobs:
+  test-1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Test
+        run: |
+          echo hello > /tmp/test-1/world.txt
+          cat /tmp/test-1/world.txt
+      - name: Test artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: world.txt
+          path: /tmp/test-1/world.txt
+
+  test-2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: world.txt
+          path: /tmp/test-2/world.txt
+
+      - name: Run Test
+        run: |
+          cat /tmp/test-2/world.txt
+~~~
