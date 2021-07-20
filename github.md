@@ -172,7 +172,7 @@ Check [Include administrators]
 ~~~
 
 ### Artifact
-- Link-1:<br>
+- Link:<br>
 https://github.com/actions/upload-artifact<br>
 https://github.com/actions/download-artifact<br>
 https://docs.github.com/en/actions/guides/storing-workflow-data-as-artifacts
