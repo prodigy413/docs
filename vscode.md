@@ -35,7 +35,7 @@ $ docker run -it --name code-server -p 127.0.0.1:8080:8080 \
   -e "DOCKER_USER=$USER" \
   codercom/code-server:latest
   
-### Check password
+### Check password when config file is in container.
 $ docker exec -it code-server bash
 $ cat ~/.config/code-server/config.yaml
 ~~~
