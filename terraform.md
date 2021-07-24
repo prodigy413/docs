@@ -1,3 +1,6 @@
+### Udemy github link
+https://github.com/stacksimplify/terraform-on-aws-ec2
+
 ### Terraform Command
 https://www.terraform.io/docs/cli/commands/index.html
 
