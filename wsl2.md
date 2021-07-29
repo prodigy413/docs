@@ -34,7 +34,7 @@ https://pureinfotech.com/shutdown-wsl-2-linux-distros-windows-10/
 ### Shutdown all distros
 > wsl --shutdown
 
-### Start or Restart distros
+### Start distros
 > wsl --distribution distros
 ~~~
 
