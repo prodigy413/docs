@@ -37,3 +37,13 @@ https://pureinfotech.com/shutdown-wsl-2-linux-distros-windows-10/
 ### Start or Restart distros
 > wsl --distribution distros
 ~~~
+
+### Run vscode
+In WSL distros, run command.
+
+~~~
+$ code .
+~~~
+
+If failed to run....
+Install [remote - wsl]extension
