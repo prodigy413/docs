@@ -21,6 +21,8 @@ https://aka.ms/wslstore<br>
 Choose Ubuntu - [Get] - [Install] - [Launch] - Set username and password
 
 ### Control
+- Refefence:<br>
+https://pureinfotech.com/shutdown-wsl-2-linux-distros-windows-10/
 
 ~~~
 ### List all running WSL distros
