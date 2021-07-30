@@ -33,7 +33,7 @@ $ nkf --guess test.py
 $ nkf -wd --overwrite test.py
 ~~~
 
-- GPG
+### GPG
 
 ~~~
 ### Encrypt key.pem and set passphrase
