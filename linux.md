@@ -33,7 +33,18 @@ $ nkf --guess test.py
 $ nkf -wd --overwrite test.py
 ~~~
 
+- GPG
 
+~~~
+### Encrypt key.pem and set passphrase
+$ gpg --symmetric --cipher-algo AES256 key.pem
+$ ls -l 
+key.pem
+key.pem.gpg
+
+### Decrypt
+$ gpg --quiet --batch --yes --decrypt --passphrase="xxxx" --output $HOME/secrets/key.pem key.pem.gpg
+~~~
 
 
 
