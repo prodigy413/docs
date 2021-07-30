@@ -46,6 +46,13 @@ key.pem.gpg
 $ gpg --quiet --batch --yes --decrypt --passphrase="xxxx" --output $HOME/secrets/key.pem key.pem.gpg
 ~~~
 
+### SSH
+- Link:<br>
+https://fixyacloud.wordpress.com/2020/01/26/can-i-automatically-add-a-new-host-to-known_hosts/
 
+~~~
+### Add host to known_hosts, login and exit 
+$ ssh -i key.pem -o StrictHostKeyChecking=no root@192.168.123.123 exit
+~~~
 
 
