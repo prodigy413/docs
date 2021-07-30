@@ -29,3 +29,9 @@ $ stress-ng -d 1 --hdd-bytes 2G
 ~~~
 $ pip freeze > requirements.txt
 ~~~
+
+### undefined
+
+~~~
+$ if [ -z "$(file test.py | grep -i crlf)" ] ; then echo "empty" ; fi
+~~~
