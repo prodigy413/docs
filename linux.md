@@ -55,4 +55,12 @@ https://fixyacloud.wordpress.com/2020/01/26/can-i-automatically-add-a-new-host-t
 $ ssh -i key.pem -o StrictHostKeyChecking=no root@192.168.123.123 exit
 ~~~
 
+### Shell
+- Run command in string
+
+~~~
+$ echo "Start `date` End"
+Start 2021年  7月 31日 土曜日 18:56:46 JST End
+~~~
+
 
