@@ -1,5 +1,15 @@
 ### Download & install cloudwatch agent
-https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/download-cloudwatch-agent-commandline.html
+- Link:<br>
+https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/download-cloudwatch-agent-commandline.html<br>
+https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/install-CloudWatch-Agent-commandline-fleet.html
+
+~~~
+$ wget https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
+$ sudo dpkg -i -E ./amazon-cloudwatch-agent.deb
+$ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s
+$ sudo systemctl status amazon-cloudwatch-agent.service
+$ cat /var/log/amazon/amazon-cloudwatch-agent/amazon-cloudwatch-agent.log
+~~~
 
 ### Check console login address
 AWS Console - [IAM] - [Dashboard] - Sign-in URL for IAM users in this account<br>
