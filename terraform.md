@@ -237,3 +237,7 @@ https://www.terraform.io/docs/language/functions/index_function.html
 comment-3
 */
 ~~~
+
+### IAM
+- Create User/Group<br>
+https://qiita.com/ldr/items/427f6cf7ed14f4187cd2
