@@ -3,6 +3,9 @@
 https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/download-cloudwatch-agent-commandline.html<br>
 https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/install-CloudWatch-Agent-commandline-fleet.html
 
+- Policy:<br>
+https://qiita.com/hayao_k/items/d983177510b3b3a69561
+
 ~~~
 $ wget https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
 $ sudo dpkg -i -E ./amazon-cloudwatch-agent.deb
