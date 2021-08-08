@@ -88,6 +88,11 @@ $ aws ec2 describe-vpcs
 $ aws ec2 describe-vpcs --query "Vpcs[].VpcId"
 ~~~
 
+### Log Group
+~~~
+$ aws logs describe-log-groups --query "logGroups[].logGroupName"
+~~~
+
 ### Check service support
 ~~~
 ### Determine which Availability Zones support your instance type
