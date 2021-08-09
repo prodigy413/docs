@@ -61,3 +61,16 @@ $ git diff master..test-branch
 $ git log --oneline
 $ git diff 234fsd..h5yhghg
 ~~~
+
+### Stash
+~~~
+## Scenario
+## - You're working in current branch.
+## - And you need to switch other branch.
+## - But you can't. because you added some changes in current branch.
+## Stash can save current status and undo temporarily.
+$ git stash
+
+## load current status
+$ git stash pop
+~~~
