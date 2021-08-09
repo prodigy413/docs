@@ -73,4 +73,20 @@ $ git stash
 
 ## load current status
 $ git stash pop
+
+## Apply working status in other branch
+## original status still remains until running pop command.
+$ git stash apply
+
+## multiple stash and list stash you saved
+$ git stash list
+
+## Call stash you saved
+$ git stash apply stash@{2}
+
+## Remove specific stash
+$ git stash drop stash@{2}
+
+## Remove all stash
+$ git stash clear
 ~~~
