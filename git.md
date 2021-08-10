@@ -120,3 +120,38 @@ $ git reset 325gsfsd
 ## Revert creates new commit
 $ git revert 325gsfsd
 ~~~
+
+### Github
+~~~
+## Add repo
+$ git remote add <remote name(you can set whatever you want)> https://zzzzzzzzz
+ex) $ git remote add origin https://zzzzzzzzz
+
+## check
+$ git remote -v
+
+## Rename
+$ git remote rename <old> <new>
+
+## Remove
+$ git remote remove <name>
+~~~
+
+~~~
+## push
+$ git push origin master
+$ git push origin test-branch
+$ git push origin pasta:spagheti
+
+## push -u option
+## Once you run [git push -u origin test],
+## You can use [git push] => means [git push origin test]
+~~~
+
+### Gtihub workflow
+1. Create a new empty repo on Github
+2. Clone the Github repo to your local machine
+
+### Main <=> Master
+1. In your repo, click [Settings]
+2. Click [Branches], change default branch
