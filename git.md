@@ -34,6 +34,9 @@ $ git branch -D test
 
 ## Change branch name
 $ git branch -m test1234
+
+## Go to branch on last
+$ git switch -
 ~~~
 
 ### Merge
@@ -89,4 +92,31 @@ $ git stash drop stash@{2}
 
 ## Remove all stash
 $ git stash clear
+~~~
+
+### Update next time
+~~~
+## Go to specific commit
+$ git checkout 34gfsdsdf
+
+$ git checkout HEAD~1
+
+## Discard changes
+$ git checkout HEAD test.txt
+$ git checkout -- test.txt
+$ git restore test.txt
+
+## Restore specific file / specific commit
+$ git restore --source HEAD~1 test.txt
+
+## Cancel add
+$ git restore --staged test.txt
+
+## Reset commit
+## Reset removes commit
+$ git reset 325gsfsd
+
+## Revert commit
+## Revert creates new commit
+$ git revert 325gsfsd
 ~~~
