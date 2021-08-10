@@ -155,3 +155,45 @@ $ git push origin pasta:spagheti
 ### Main <=> Master
 1. In your repo, click [Settings]
 2. Click [Branches], change default branch
+
+### Remote Tracking Branches
+~~~
+$ git branch -r
+## If you commit several times locally,
+                   main
+commit1 - commit2 -commit3
+origin/main
+
+## This command back to origin/main
+$ git checkout origin/main
+
+## This command back to main
+$ git switch -
+$ git switch main
+~~~
+
+### Work with several branched locally
+~~~
+## After clone
+$ git branch -r
+$ git checkout --track origin/branch-name
+or
+$ git switch branch-name
+~~~
+
+### Fetch
+~~~
+## You're working in local
+## Remote branch updated
+## download updated info
+## but not integrated
+$ git fetch origin
+$ git checkout origin/xxxx
+
+~~~
+
+### Pull
+~~~
+## Actually update
+## git pull origin branch
+~~~
