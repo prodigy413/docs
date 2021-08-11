@@ -37,12 +37,21 @@ docker:x:998:obi
 ### Command summary
 
 ~~~
-$ sudo docker build -t test:1.0 .
-$ sudo docker pull test:1.0
-$ sudo docker run --name test -d test:1.0 -v /host/test:/container/test
-$ sudo docker run --name test -d test:1.0 -v /host/test:/container/test:ro
-$ sudo docker exec -it test sh
-$ sudo docker stop test
-$ sudo docker rm test
-$ sudo docker rmi test
+$ docker image ls
+$ docker container ls -a
+$ docker ps -a
+$ docker build -t test:1.0 .
+$ docker pull test:1.0
+
+## [-d]: detach, [-P]: random port
+$ docker run --name test -d test:1.0 -v /host/test:/container/test
+$ docker run --name test -d test:1.0 -v /host/test:/container/test:ro
+$ docker run --name test -d -P test:1.0
+$ docker exec -it test sh
+$ docker stop test
+$ docker rm test
+$ docker rmi test
+$ docker inspect 13fdsf4f
+$ docker run -e ENV_TEST=obiwan test env | grep ENV_TEST
+$ docker logs efgsd3fg
 ~~~
