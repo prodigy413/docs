@@ -89,6 +89,9 @@ $ aws ec2 describe-vpcs --query "Vpcs[].VpcId"
 ~~~
 
 ### Log Group
+- Reference<br>
+https://dev.classmethod.jp/articles/operate-cloudwatch-log-group-using-cli-for-beginners/
+
 ~~~
 $ aws logs describe-log-groups --query "logGroups[].logGroupName"
 ~~~
