@@ -77,3 +77,6 @@ comment-3
 ### IAM
 - Create User/Group<br>
 https://qiita.com/ldr/items/427f6cf7ed14f4187cd2
+
+### Terraform Blogs
+https://y-ohgi.com/introduction-terraform/<br>
