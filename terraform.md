@@ -56,7 +56,11 @@ $ terraform apply
 $ terraform destroy
 
 ### Add auto yes flag
-terraform apply -auto-approve
+$ terraform apply -auto-approve
+
+### Reference var_file
+$ terraform plan -var-file="../1_variables/terraform.tfvars" -out file_for_apply
+$ terraform apply --auto-approve "file_for_apply"
 ~~~
 
 ### Index function
