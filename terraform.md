@@ -60,11 +60,11 @@ $ terraform apply -auto-approve
 
 ### Create with variable file
 $ terraform plan -var-file="../1_variables/terraform.tfvars" -out file_for_apply
-$ terraform apply --auto-approve "file_for_apply"
+$ terraform apply -auto-approve "file_for_apply"
 
 ### Destroy with variable file
 $ terraform plan -var-file="../1_variables/terraform.tfvars" -destroy -out file_for_apply
-$ terraform apply --auto-approve "file_for_apply"
+$ terraform apply -auto-approve "file_for_apply"
 ~~~
 
 ### Index function
