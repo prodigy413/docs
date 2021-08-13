@@ -4,8 +4,10 @@ https://github.com/stacksimplify/terraform-on-aws-ec2
 ### Terraform Command
 https://www.terraform.io/docs/cli/commands/index.html
 
-### Download Command
+### Terraform providers & modules page
+https://registry.terraform.io/
 
+### Download Command
 https://www.terraform.io/downloads.html
 
 ~~~
@@ -88,3 +90,6 @@ https://qiita.com/ldr/items/427f6cf7ed14f4187cd2
 
 ### Terraform Blogs
 https://y-ohgi.com/introduction-terraform/<br>
+
+### Directory structure sample
+https://www.m3tech.blog/entry/2020/07/27/150000
