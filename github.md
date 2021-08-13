@@ -170,3 +170,15 @@ Check [Include administrators]
 *.py  @prodigy413
 /public/ @leonheart413
 ~~~
+
+### Push symlink
+~~~
+$ mkdir share && cd share
+$ echo "This is test" >> test.txt
+$ cd ..
+$ mkdir main && cd main
+$ ln -s ../share/test.txt test.txt
+$ ls -l
+total 0
+lrwxrwxrwx 1 obi obi 17  8月 13 17:05 test.txt -> ../share/test.txt
+~~~
