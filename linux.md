@@ -66,3 +66,8 @@ Start 2021年  7月 31日 土曜日 18:56:46 JST End
 ### Permission
 - Link: https://crontab.guru
 
+### Symbolic link
+~~~
+$ ln -s [directory or file] linkname
+$ unlink linkname
+~~~
