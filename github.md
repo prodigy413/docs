@@ -112,7 +112,9 @@ $ git remote -v
 ~~~
 
 ### Set pre-commit
-- Link: https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks
+- Link:<br>
+https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks<br>
+https://qiita.com/ishim0226/items/7767ee6d0828d3c84122
 - Config
 
 ~~~
@@ -128,7 +130,7 @@ echo "Test"
 ~~~
 
 ### Github REST API
-- Link: https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api
+- Link:<br>https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api
 - Samples
 
 ~~~
