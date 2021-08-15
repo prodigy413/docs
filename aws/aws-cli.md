@@ -5,12 +5,6 @@ $ aws iam list-users --query Users[].[UserName,Arn] --output table
 
 ## Get current user info
 $ aws sts get-caller-identity
-{
-    "UserId": "AIDA4JBR2IM2EH45XBK67",
-    "Account": "844065555252",
-    "Arn": "arn:aws:iam::844065555252:user/test"
-}
-
 ~~~
 
 ### Group
