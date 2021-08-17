@@ -184,3 +184,21 @@ $ ls -l
 total 0
 lrwxrwxrwx 1 obi obi 17  8月 13 17:05 test.txt -> ../share/test.txt
 ~~~
+
+### Caching your GitHub credentials in Git
+- Link:<br>
+https://docs.github.com/en/get-started/getting-started-with-git/caching-your-github-credentials-in-git<br>
+https://github.com/microsoft/Git-Credential-Manager-Core/releases/tag/v2.0.498<br>
+https://github.com/microsoft/Git-Credential-Manager-Core/blob/main/docs/linuxcredstores.md
+
+- Access Token<br>
+https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token
+
+~~~
+$ sudo dpkg -i gcmcore-linux_amd64.2.0.498.54650.deb
+$ git-credential-manager-core configure
+$ git config --global credential.credentialStore plaintext
+
+$ git clone https://xxxxxxx.git
+Select access token
+~~~
