@@ -1,7 +1,12 @@
-~~~
 #!/bin/bash
 
 start=`date "+%H:%M:%S"`
+
+function tasktime() {
+  end=`date "+%H:%M:%S"`
+  echo "Task started at ${start}"
+  echo "Task completed at ${end}"
+}
 
 if [ "$1" = "main" ]; then
   echo -n "This is production environment. Continue？ [y/n]: "
@@ -9,10 +14,7 @@ if [ "$1" = "main" ]; then
   if [[ ${answer,,} = y ]]; then
     echo "Good!!"
 
-    end=`date "+%H:%M:%S"`
-
-    echo "Task started at ${start}"
-    echo "Task completed at ${end}"
+  tasktime
   else
     echo "Task stopped"
     exit 1
@@ -20,12 +22,7 @@ if [ "$1" = "main" ]; then
 elif [ "$1" = "dev" ]; then
   echo "This is dev"
 
-  end=`date "+%H:%M:%S"`
-
-  echo "Task started at ${start}"
-  echo "Task completed at ${end}"
+  tasktime
 else
   echo "Bad"
 fi
-
-~~~
