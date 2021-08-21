@@ -153,6 +153,9 @@ $ curl -s https://api.github.com/users/prodigy413/repos | jq -r '.[].name'
 20210602_test
 cicd-test
 .........
+
+### You can check url like release, branch.....
+$ curl -s https://api.github.com/users/prodigy413/repos
 ~~~
 
 ### branch setting
