@@ -71,3 +71,12 @@ Start 2021年  7月 31日 土曜日 18:56:46 JST End
 $ ln -s [directory or file] linkname
 $ unlink linkname
 ~~~
+
+### Record logs
+~~~
+$ script -a logs.txt
+
+### Stop logging
+$ exit
+~~~
+
