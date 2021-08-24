@@ -7,6 +7,9 @@ https://www.terraform.io/docs/cli/commands/index.html
 ### Terraform providers & modules page
 https://registry.terraform.io/
 
+### Best practices
+https://www.terraform-best-practices.com/
+
 ### Download Command
 https://www.terraform.io/downloads.html
 
