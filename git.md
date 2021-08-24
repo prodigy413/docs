@@ -1,3 +1,9 @@
+### Initial config
+~~~
+$ git config --global user.name "xxxxxxx"
+$ git config --global user.email xxxxx@xxxxx
+~~~
+
 ### Commit
 ~~~
 ## Basic
@@ -142,6 +148,7 @@ $ git remote remove <name>
 $ git push origin master
 $ git push origin test-branch
 $ git push origin pasta:spagheti
+$ git push --set-upstream origin test-branch
 
 ## push -u option
 ## Once you run [git push -u origin test],
