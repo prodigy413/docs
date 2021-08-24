@@ -19,6 +19,9 @@ $ sudo docker -v
 Docker version 20.10.7, build f0df350
 ~~~
 
+### Where images are stored
+`/var/lib/docker`
+
 ### Set user/group
 
 ~~~
