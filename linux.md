@@ -80,3 +80,12 @@ $ script -a logs.txt
 $ exit
 ~~~
 
+### Show pkgs
+~~~
+$ sudo apt list --installed
+$ sudo dpkg-query -l
+~~~
+
+### Commands reference
+https://hydrocul.github.io/wiki/commands/date.html
+
