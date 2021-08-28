@@ -58,4 +58,5 @@ $ docker inspect 13fdsf4f
 $ docker run -e ENV_TEST=obiwan test env | grep ENV_TEST
 $ docker logs efgsd3fg
 $ docker run --name nginx -d -p 8080:80 nginx:1.21
+$ docker run --name nginx -v /home/obi/test/html:/usr/share/nginx/html:ro -d -p 8080:80 nginx:1.21
 ~~~
