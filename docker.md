@@ -60,3 +60,12 @@ $ docker logs efgsd3fg
 $ docker run --name nginx -d -p 8080:80 nginx:1.21
 $ docker run --name nginx -v /home/obi/test/html:/usr/share/nginx/html:ro -d -p 8080:80 nginx:1.21
 ~~~
+
+### Management
+
+~~~
+$ docker system df
+$ docker volume prune => Remove all volumes except for running containers
+$ docker volume ls
+$ docker system prune => Remove all except for running containers
+~~~
