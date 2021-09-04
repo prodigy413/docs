@@ -86,6 +86,15 @@ $ sudo apt list --installed
 $ sudo dpkg-query -l
 ~~~
 
+### zip
+~~~
+## ZIP is not deterministic.
+## Hash is changed, Everytime it is created.
+## When zip creates zip file, it includes permission, os, zip file creation time info.
+## -X option removes external info, bu file creatin time.
+$ zip -X test.zip test.txt
+~~~
+
 ### Commands reference
 https://hydrocul.github.io/wiki/commands/date.html
 
