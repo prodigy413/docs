@@ -95,6 +95,13 @@ $ sudo dpkg-query -l
 $ zip -X test.zip test.txt
 ~~~
 
+### npm
+~~~
+$ sudo apt install npm
+$ npm --version
+6.14.4
+~~~
+
 ### Commands reference
 https://hydrocul.github.io/wiki/commands/date.html
 
