@@ -93,6 +93,8 @@ $ sudo dpkg-query -l
 ## When zip creates zip file, it includes permission, os, zip file creation time info.
 ## -X option removes external info, bu file creatin time.
 $ zip -X test.zip test.txt
+
+$ zip -r test.zip *
 ~~~
 
 ### npm
