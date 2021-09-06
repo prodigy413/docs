@@ -40,4 +40,41 @@ $ ./node_modules/.bin/cypress open
 $ ./node_modules/.bin/cypress
 
 $ ./node_modules/.bin/cypress run --spec "./cypress/integration/2-advanced-examples/actions.spec.js"
+
+
+
+### test
+https://docs.cypress.io/guides/getting-started/writing-your-first-test
+
+~~~
+$ mkdir cypress_test
+$ cd cypress_test
+$ npm install cypress
+$ mkdir -p cypress/integration
+$ cd cypress/integration
+$ vi sample.js
+$ cat sample.js 
+describe('My First Test', () => {
+  it('Does not do much!', () => {
+    expect(true).to.equal(true)
+  })
+})
+
+$ cd ../../
+$ echo "{}" > cypress.json
+$ ./node_modules/.bin/cypress run
+~~~
+
+### docker
+https://hub.docker.com/r/cypress/included<br>
+https://www.cypress.io/blog/2019/05/02/run-cypress-with-a-single-docker-command/
+
+~~~
+### current directory
+cypress/
+  integration/
+    spec.js
+cypress.json
+
+$ docker run -it -v $PWD:/e2e -w /e2e cypress/included:8.3.1
 ~~~
