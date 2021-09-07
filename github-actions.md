@@ -527,3 +527,6 @@ jobs:
         run: |
           cat /tmp/test-2/world.txt
 ~~~
+
+### Storage status check
+Your account > [Settings] > [Billing & plans] : Storage for Actions and Packages
