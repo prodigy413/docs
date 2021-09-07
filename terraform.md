@@ -10,6 +10,9 @@ https://registry.terraform.io/
 ### Best practices
 https://www.terraform-best-practices.com/
 
+### Terraform Github actions sample
+https://learn.hashicorp.com/tutorials/terraform/github-actions
+
 ### Download Command
 https://www.terraform.io/downloads.html
 
