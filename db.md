@@ -21,11 +21,11 @@ https://mariadb.com/kb/en/create-database/<br>
 https://www.dbonline.jp/mariadb/<br>
 
 ~~~
-CREATE USER 'readonly' IDENTIFIED BY 'Dkagh800413.';
+CREATE USER 'readonly' IDENTIFIED BY 'xxxxxxxxxx';
 
-GRANT SELECT ON *.* TO 'readonly'@'%' IDENTIFIED BY 'Dkagh800413.';
+GRANT SELECT ON *.* TO 'readonly'@'%' IDENTIFIED BY 'xxxxxxxxxx';
 
-GRANT SELECT ON *.* TO 'readonly'@'localhost' IDENTIFIED BY 'Dkagh800413.';
+GRANT SELECT ON *.* TO 'readonly'@'localhost' IDENTIFIED BY 'xxxxxxxxxx';
 
 SELECT user,host FROM mysql.user;
 
