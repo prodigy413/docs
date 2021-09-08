@@ -204,3 +204,10 @@ $ git checkout origin/xxxx
 ## Actually update
 ## git pull origin branch
 ~~~
+
+### Prevent merge until github actions passed
+- In repository, [Settings] > [Branches] > [Add rule]
+- Set [Branch name pattern] ex) main
+- Check [Require status checks to pass before merging]
+- Click [Search for status...], then it shows you github actions
+- Check [Include administrators]
