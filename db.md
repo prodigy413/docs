@@ -25,6 +25,8 @@ CREATE USER 'test' IDENTIFIED BY 'xxxxxxxxxx';
 
 SELECT user,host FROM mysql.user;
 
+DROP USER test;
+
 show databases;
 
 CREATE DATABASE test;
