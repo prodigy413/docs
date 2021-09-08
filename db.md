@@ -39,7 +39,7 @@ INSERT INTO test values(1);
 
 SELECT * FROM test;
 
-UPDATE test SET a=11
+UPDATE test SET a=11;
 
 DELETE FROM test WHERE a=11;
 
