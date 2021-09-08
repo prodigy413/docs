@@ -23,6 +23,8 @@ https://www.dbonline.jp/mariadb/<br>
 ~~~
 CREATE USER 'test' IDENTIFIED BY 'xxxxxxxxxx';
 
+SELECT user,host FROM mysql.user;
+
 show databases;
 
 CREATE DATABASE test;
