@@ -29,6 +29,8 @@ GRANT SELECT ON *.* TO 'readonly'@'localhost' IDENTIFIED BY 'xxxxxxxxxx';
 
 SELECT user,host FROM mysql.user;
 
+SET PASSWORD FOR 'test' = PASSWORD('xxxxxxxxxx');
+
 DROP USER test;
 
 show databases;
