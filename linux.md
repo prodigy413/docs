@@ -104,6 +104,11 @@ $ npm --version
 6.14.4
 ~~~
 
+### Create random password
+~~~
+openssl rand -base64 8
+~~~
+
 ### Commands reference
 https://hydrocul.github.io/wiki/commands/date.html
 
