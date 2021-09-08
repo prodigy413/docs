@@ -106,7 +106,7 @@ $ npm --version
 
 ### Create random password
 ~~~
-openssl rand -base64 8
+$ openssl rand -base64 8
 ~~~
 
 ### Commands reference
