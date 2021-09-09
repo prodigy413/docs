@@ -11,7 +11,7 @@ mysqldump -h xxxxxxx.ap-northeast-1.rds.amazonaws.com -u admin -p --port=3306 --
 https://hub.docker.com/_/mysql
 
 ~~~
-docker run -it --rm mysql mysql:latest -hsome.mysql.host -uadmin -p
+docker run -it --rm mysql mysql -hsome.mysql.host -uadmin -p
 ~~~
 
 ### MariaDB create user
