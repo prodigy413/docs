@@ -60,3 +60,11 @@ FLUSH PRIVILEGES;
 
 ### mysqldump summary
 https://qiita.com/PlanetMeron/items/3a41e14607a65bc9b60c
+
+### user query history
+ - When mariaDB, you need to set "general_log" = "1"
+
+~~~
+USE mysql;
+SELECT * FROM general_log WHERE user_host REGEXP '^admin' AND command_type='Query';
+~~~
