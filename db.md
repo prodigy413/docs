@@ -62,7 +62,9 @@ FLUSH PRIVILEGES;
 https://qiita.com/PlanetMeron/items/3a41e14607a65bc9b60c
 
 ### user query history
- - When mariaDB, you need to set "general_log" = "1"
+ - When mariaDB, you need to set "general_log" = "1"<br>
+https://aws.amazon.com/jp/blogs/news/monitor-amazon-rds-for-mysql-and-mariadb-logs-with-amazon-cloudwatch/<br>
+https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.MariaDB.html
 
 ~~~
 USE mysql;
