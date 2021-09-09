@@ -66,5 +66,5 @@ https://qiita.com/PlanetMeron/items/3a41e14607a65bc9b60c
 
 ~~~
 USE mysql;
-SELECT * FROM general_log WHERE user_host REGEXP '^admin' AND command_type='Query';
+SELECT event_time,user_host,command_type,argument FROM general_log WHERE user_host REGEXP '^admin' AND command_type='Query';
 ~~~
