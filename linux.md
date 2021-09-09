@@ -109,6 +109,11 @@ $ npm --version
 $ openssl rand -base64 8
 ~~~
 
+### curl
+~~~
+$ curl -user USER_ID:PASSWORD http://www.example.com/
+~~~
+
 ### Commands reference
 https://hydrocul.github.io/wiki/commands/date.html
 
