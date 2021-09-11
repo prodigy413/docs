@@ -55,6 +55,18 @@ https://fixyacloud.wordpress.com/2020/01/26/can-i-automatically-add-a-new-host-t
 $ ssh -i key.pem -o StrictHostKeyChecking=no root@192.168.123.123 exit
 ~~~
 
+- Install
+
+~~~
+$ sudo apt install openssh-server
+$ sudo systemctl enable ssh --now
+$ sudo systemctl status ssh
+$ sudo ufw allow ssh
+
+## Client
+$ sudo apt-get install openssh-client
+~~~
+
 ### Shell
 - Run command in string
 
