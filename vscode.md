@@ -1,3 +1,10 @@
+### Install vscode
+https://code.visualstudio.com/Download
+
+~~~
+sudo apt install ./code_1.60.0-1630494279_amd64.deb
+~~~
+
 ### Extensions
 - YAML to JSON<br>
 After creating yaml file, LMB - [Command Palette..] - search [convert]
