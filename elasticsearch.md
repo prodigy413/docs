@@ -152,7 +152,14 @@ curl -H "Content-Type: application/json" -u "elastic:$PASSWORD" -XGET -k "https:
 curl -H "Content-Type: application/json" -u "elastic:$PASSWORD" -XPOST -k "hhttps://es.test.local/analyzer_test/_doc/5" -d '
 
 
-~~~
 
+https://tech-blog.rakus.co.jp/entry/20191002/elasticsearch<br>
+https://medium.com/hello-elasticsearch/elasticsearch-833a0704e44b<br>
+https://qiita.com/shin_hayata/items/41c07923dbf58f13eec4#ja_stop-token-filter<br>
+https://www.elastic.co/guide/en/elasticsearch/reference/6.8/_testing_analyzers.html<br>
+https://qiita.com/C_HERO/items/094af261db4725b4baa9<br>
+https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-stop-analyzer.html<br>
+https://qbox.io/blog/elasticsearch-stopwords-filtering-tutorial/<br>
+https://qbox.io/blog/how-to-use-elasticsearch-remove-stopwords-from-query/<br>
+https://stackoverflow.com/questions/26730349/can-i-specify-regexp-in-stopwords-for-stop-analyzer-in-elasticsearch<br>
 
-~~~
