@@ -18,7 +18,6 @@ curl -H "Content-Type: application/json" -u "elastic:$PASSWORD" -XPUT -d @mappin
 
 curl -H "Content-Type: application/json" -u "elastic:$PASSWORD" -XGET -k "https://es.test.local/movies/_mapping"
 
-~~~
 curl -H "Content-Type: application/json" -u "elastic:$PASSWORD" -XPUT -d @mapping2.json -k "https://es.test.local/movies"
 ~~~
 
