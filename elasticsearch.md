@@ -113,7 +113,7 @@ curl -H "Content-Type: application/json" -u "elastic:$PASSWORD" -XGET -k "https:
 
 ### Get Index
 
-~~
+~~~
 curl -H "Content-Type: application/json" -u "elastic:$PASSWORD" -XGET -k "https://es.test.local/_cat/indices"
 ~~~
 
