@@ -142,14 +142,13 @@ curl -H "Content-Type: application/json" -u "elastic:$PASSWORD" -XPUT -k "https:
 curl -H "Content-Type: application/json" -u "elastic:$PASSWORD" -XPOST -k "https://es.test.local/analyzer_test/_open"
 ~~~
 
-
-
+~~~
 curl -H "Content-Type: application/json" -u "elastic:$PASSWORD" -XPUT  -k "https://es.test.local/_bulk?pretty" --data-binary @stop_data.json
 
 curl -H "Content-Type: application/json" -u "elastic:$PASSWORD" -XGET -k "https://es.test.local/analyzer_test/_search?pretty" -d @stop_search_word.json
 
 curl -H "Content-Type: application/json" -u "elastic:$PASSWORD" -XPOST -k "hhttps://es.test.local/analyzer_test/_doc/5" -d '
-
+~~~
 
 
 https://tech-blog.rakus.co.jp/entry/20191002/elasticsearch<br>
