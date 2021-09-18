@@ -128,3 +128,20 @@ https://docs.docker.com/registry/spec/api/#pulling-an-image
 TOKEN=$(aws ecr get-authorization-token --output text --query 'authorizationData[].authorizationToken')
 curl -i -H "Authorization: Basic $TOKEN" https://aws_account_id.dkr.ecr.region.amazonaws.com/v2/repository/tags/list
 ~~~
+
+### Cloudfront associate-alias
+https://levelup.gitconnected.com/gradual-deployment-of-web-apps-with-cloudfront-s3-lambda-and-cookies-ce17473afabe<br>
+https://d1.awsstatic.com/whitepapers/Building%20Static%20Websites%20on%20AWS.pdf<br>
+https://stackoverflow.com/questions/60030262/s3-static-website-w-bluegreen-deployment<br>
+https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html
+
+~~~
+## Check which cloudfront is using cname cf.great-obi.com. target Cloudfront(E7A040MHQTSGY) is meaningless
+aws cloudfront list-conflicting-aliases --alias cf.great-obi.com --distribution-id E2EADWJC134IMV
+
+## Change cname cf.great-obi.com to Cloudfront(E7A040MHQTSGY)
+aws cloudfront associate-alias --alias cf.great-obi.com --target-distribution-id E7A040MHQTSGY
+~~~
+
+
+
