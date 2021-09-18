@@ -117,4 +117,6 @@ aws ecr list-images --repository-name my-repo
 aws ecr batch-delete-image --repository-name my-repo --image-ids imageTag=tag1 imageTag=tag2
 
 aws ecr batch-delete-image --repository-name my-repo --image-ids imageDigest=sha256:4f70ef7a4d29e8c0c302b13e25962d8f7a0bd304EXAMPLE
+
+aws ecr describe-images --repository-name greatobi-ecr-dev --query "imageDetails[].[imageTags, imageSizeInBytes, imageScanStatus.status]" --output table
 ~~~
