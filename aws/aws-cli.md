@@ -97,7 +97,23 @@ $ aws ec2 describe-instance-type-offerings --location-type availability-zone  --
 ~~~
 
 ### ECR
+https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html
+
 ~~~
 ## You should set username AWS not your IAM user.
 aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com
+
+docker build -t aws_account_id.dkr.ecr.region.amazonaws.com/repository/nginx:1.0 .
+
+docker push aws_account_id.dkr.ecr.region.amazonaws.com/repository/nginx:1.0
+
+aws ecr describe-repositories
+
+aws ecr describe-images --repository-name amazonlinux
+
+aws ecr list-images --repository-name my-repo
+
+aws ecr batch-delete-image --repository-name my-repo --image-ids imageTag=tag1 imageTag=tag2
+
+aws ecr batch-delete-image --repository-name my-repo --image-ids imageDigest=sha256:4f70ef7a4d29e8c0c302b13e25962d8f7a0bd304EXAMPLE
 ~~~
