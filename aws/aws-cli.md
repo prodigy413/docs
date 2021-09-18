@@ -98,5 +98,6 @@ $ aws ec2 describe-instance-type-offerings --location-type availability-zone  --
 
 ### ECR
 ~~~
-aws ecr get-login-password --region ap-northeast-1 | docker login --username test --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com
+## You should set username AWS not your IAM user.
+aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com
 ~~~
