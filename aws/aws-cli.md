@@ -98,5 +98,5 @@ $ aws ec2 describe-instance-type-offerings --location-type availability-zone  --
 
 ### ECR
 ~~~
-aws ecr get-login-password --region ap-northeast-1 | docker login --username test --password-stdin 844065555252.dkr.ecr.ap-northeast-1.amazonaws.com/greatobi-ecr-dev
+aws ecr get-login-password --region ap-northeast-1 | docker login --username test --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com
 ~~~
