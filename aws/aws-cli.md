@@ -120,3 +120,11 @@ aws ecr batch-delete-image --repository-name my-repo --image-ids imageDigest=sha
 
 aws ecr describe-images --repository-name greatobi-ecr-dev --query "imageDetails[].[imageTags, imageSizeInBytes, imageScanStatus.status]" --output table
 ~~~
+
+### Docker Registry HTTP API V2
+https://docs.docker.com/registry/spec/api/#pulling-an-image
+
+~~~
+TOKEN=$(aws ecr get-authorization-token --output text --query 'authorizationData[].authorizationToken')
+curl -i -H "Authorization: Basic $TOKEN" https://aws_account_id.dkr.ecr.region.amazonaws.com/v2/repository/tags/list
+~~~
