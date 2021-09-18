@@ -95,3 +95,8 @@ $ aws logs describe-log-groups --query "logGroups[].logGroupName"
 ### Determine which Availability Zones support your instance type
 $ aws ec2 describe-instance-type-offerings --location-type availability-zone  --filters Name=instance-type,Values=t3.micro --region ap-northeast-1 --output table
 ~~~
+
+### ECR
+~~~
+aws ecr get-login-password --region ap-northeast-1 | docker login --username test --password-stdin 844065555252.dkr.ecr.ap-northeast-1.amazonaws.com/greatobi-ecr-dev
+~~~
