@@ -1,1 +1,3 @@
-https://tundra-mitten-367.notion.site/OWASP-ZAP-5957cfbd8e3441c58ef75ef6f57b8ab6
+### Content-Type
+- `<meta charset="utf-8">` is same as `<meta http-equiv="Content-Type" content="text/html; charset=utf-8">`<br>
+https://code.google.com/archive/p/doctype-mirror/wikis/MetaCharsetAttribute.wiki
