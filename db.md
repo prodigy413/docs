@@ -70,3 +70,7 @@ https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.M
 USE mysql;
 SELECT event_time,user_host,command_type,argument FROM general_log WHERE user_host REGEXP '^admin' AND command_type='Query';
 ~~~
+
+### REGEXP
+https://www.dbonline.jp/mysql/select/index8.html<br>
+https://dev.mysql.com/doc/refman/8.0/en/regexp.html<br>
