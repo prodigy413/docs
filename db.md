@@ -45,6 +45,8 @@ CREATE TABLE test (a int);
 
 show tables;
 
+show columns from test;
+
 INSERT INTO test values(1);
 
 SELECT * FROM test;
