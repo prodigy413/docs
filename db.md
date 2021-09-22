@@ -53,6 +53,8 @@ UPDATE test SET a=11;
 
 DELETE FROM test WHERE a=11;
 
+DROP TABLE test;
+
 ## read only user
 GRANT SELECT ON *.* TO 'test';
 FLUSH PRIVILEGES;
