@@ -51,6 +51,8 @@ INSERT INTO test values(1);
 
 SELECT * FROM test;
 
+SELECT a FROM test WHERE a IS NULL;
+
 UPDATE test SET a=11;
 
 DELETE FROM test WHERE a=11;
