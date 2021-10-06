@@ -62,6 +62,14 @@ DROP TABLE test;
 ## read only user
 GRANT SELECT ON *.* TO 'test';
 FLUSH PRIVILEGES;
+
+
+
+### Get schema
+mysqldump -h <RDSのエンドポイント> -u <ユーザ名> -p<パスワード> --single-transaction --no-data <DB名> > ddl.sql
+
+### Apply schema
+mysql -h <RDSのエンドポイント> -u <ユーザ名> -p<パスワード> <DB名> < ddl.sql
 ~~~
 
 ### mysqldump summary
