@@ -126,6 +126,14 @@ $ openssl rand -base64 8
 $ curl -user USER_ID:PASSWORD http://www.example.com/
 ~~~
 
+### Grep
+~~~
+## Search sub directories recursively using grep
+grep -r 'word-to-search' *
+grep -R 'word-to-search' *
+grep -r '192.168.1.254' /etc/
+~~~
+
 ### Commands reference
 https://hydrocul.github.io/wiki/commands/date.html
 
