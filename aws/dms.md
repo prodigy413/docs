@@ -8,3 +8,6 @@ https://techblog.timers-inc.com/entry/2019/04/29/080000<br>
 
 - Aurora:<br>
 https://aws.amazon.com/blogs/database/performing-major-version-upgrades-for-amazon-aurora-mysql-with-minimum-downtime/<br>
+
+- Aurora Blue / Green
+https://aws.amazon.com/blogs/database/performing-major-version-upgrades-for-amazon-aurora-mysql-with-minimum-downtime/<br>
