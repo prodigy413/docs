@@ -143,5 +143,25 @@ aws cloudfront list-conflicting-aliases --alias cf.great-obi.com --distribution-
 aws cloudfront associate-alias --alias cf.great-obi.com --target-distribution-id E7A040MHQTSGY
 ~~~
 
+### S3
+~~~
+aws s3 rm s3://test-path --recursive
+aws s3 rm s3://test-path/directory --recursive
+aws s3api list-object-versions --bucket test-path
+aws s3api list-objects --bucket test-path
+aws s3 ls --recursive s3://test-path --summarize
+aws s3 sync s3://source s3://target
+aws s3 sync s3://source s3://target --exact-timestamps => sync compares size, so if size is same it won't sync. need to compare timestamps
+~~~
 
+- Remove versioned s3
+~~~python
+import boto3
 
+s3 = boto3.resource('s3')
+bucket = s3.Bucket('your-bucket-name')
+bucket.object_versions.all().delete()
+
+# if you want to remove bucket
+#bucket.delete()
+~~~
