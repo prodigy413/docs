@@ -90,6 +90,9 @@ comment-3
 */
 ~~~
 
+### Use json files
+https://beyondjapan.com/blog/2020/04/fargate-supported-efs/
+
 ### IAM
 - Create User/Group<br>
 https://qiita.com/ldr/items/427f6cf7ed14f4187cd2
