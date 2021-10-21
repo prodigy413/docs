@@ -122,6 +122,10 @@ aws ecr describe-images --repository-name greatobi-ecr-dev --query "imageDetails
 ~~~
 
 ### ECS
+- Config metrics manually<br>
+https://qiita.com/herohit-tool/items/1b1851f7f4f6748c9372<br>
+https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Agent-Configuration-File-Details.html<br>
+
 ~~~
 aws ecs describe-tasks --cluster greatobi-dev-ecs-01 --tasks 0bdc927a1f864135bd5353614c8e35d7
 ~~~
