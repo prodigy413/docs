@@ -134,6 +134,43 @@ grep -R 'word-to-search' *
 grep -r '192.168.1.254' /etc/
 ~~~
 
+### stress-ng
+- Link: https://qiita.com/hana_shin/items/0a3a615274717c89c0a4<br>
+
+~~~
+sudo apt install stress-ng
+stress-ng -V
+
+## CPU100%
+## -c is process count
+stress-ng -c 1
+
+## CPU50%
+stress-ng -c 1 -l 50
+
+## memory
+## -m is process count
+stress-ng -m 1 --vm-bytes 1G --timeout 10
+
+## Disk
+stress-ng -d 1 --hdd-bytes 2G
+~~~
+
+~~~
+## write speed
+## 10G file(1MiB*10000)
+time dd if=/dev/zero of=zero.txt bs=1MiB count=10000; time sync
+# 1G file(1MiB*1000)
+time dd if=/dev/zero of=zero.txt bs=1MiB count=1000; time sync
+# 1M file(1MiB*1)
+time dd if=/dev/zero of=zero.txt bs=1MiB count=1; time sync
+# 4k file(4KiB *1)
+time dd if=/dev/zero of=zero.txt bs=4KiB count=1; time sync
+
+## read speed
+time dd if=zero.txt of=/dev/null
+~~~
+
 ### Commands reference
 https://hydrocul.github.io/wiki/commands/date.html
 
