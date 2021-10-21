@@ -121,6 +121,11 @@ aws ecr batch-delete-image --repository-name my-repo --image-ids imageDigest=sha
 aws ecr describe-images --repository-name greatobi-ecr-dev --query "imageDetails[].[imageTags, imageSizeInBytes, imageScanStatus.status]" --output table
 ~~~
 
+### ECS
+~~~
+aws ecs describe-tasks --cluster greatobi-dev-ecs-01 --tasks 0bdc927a1f864135bd5353614c8e35d7
+~~~
+
 ### Docker Registry HTTP API V2
 https://docs.docker.com/registry/spec/api/#pulling-an-image
 
