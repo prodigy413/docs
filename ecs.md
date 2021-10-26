@@ -9,3 +9,9 @@ https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-wor
 curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
 sudo dpkg -i session-manager-plugin.deb
 ~~~
+
+### Container Definition
+https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html
+
+### Task Definition
+https://docs.aws.amazon.com/AmazonECS/latest/developerguide/example_task_definitions.html
