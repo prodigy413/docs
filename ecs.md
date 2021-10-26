@@ -15,3 +15,6 @@ https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinitio
 
 ### Task Definition
 https://docs.aws.amazon.com/AmazonECS/latest/developerguide/example_task_definitions.html
+
+### ECS Deep Dive
+https://d1.awsstatic.com/webinars/jp/pdf/services/20190731_AWS-BlackBelt_AmazonECS_DeepDive_Rev.pdf
