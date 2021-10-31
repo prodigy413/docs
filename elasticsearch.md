@@ -164,3 +164,5 @@ https://qbox.io/blog/elasticsearch-stopwords-filtering-tutorial/<br>
 https://qbox.io/blog/how-to-use-elasticsearch-remove-stopwords-from-query/<br>
 https://stackoverflow.com/questions/26730349/can-i-specify-regexp-in-stopwords-for-stop-analyzer-in-elasticsearch<br>
 
+### k8s API Reference
+https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-api-reference.html
