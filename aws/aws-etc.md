@@ -29,3 +29,6 @@ https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-a
 
 ### Assigning parameter policies
 https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html
+
+### AWS Lambda & Good aws site - DENET
+https://blog.denet.co.jp/lambda-python-zip/
