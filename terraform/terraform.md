@@ -102,3 +102,6 @@ https://y-ohgi.com/introduction-terraform/<br>
 
 ### Directory structure sample
 https://www.m3tech.blog/entry/2020/07/27/150000
+
+### Terraform AWS Cloud Control Provider
+https://www.hashicorp.com/blog/announcing-terraform-aws-cloud-control-provider-tech-preview
