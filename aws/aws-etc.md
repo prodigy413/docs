@@ -23,3 +23,9 @@ My test lab: https://844065555252.signin.aws.amazon.com/console
 https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
 - Container Definition<br>
 https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html
+
+### Restricting access to Systems Manager parameters using IAM policies
+https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-access.html
+
+### Assigning parameter policies
+https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html
