@@ -1,3 +1,12 @@
+### aws configure
+~~~
+aws configure
+AWS Access Key ID [None]: xxxxxxxx
+AWS Secret Access Key [None]: xxxxxxx
+Default region name [None]: ap-northeast-1
+Default output format [None]: json
+~~~
+
 ### User
 ~~~
 $ aws iam create-user --user-name test
@@ -161,6 +170,19 @@ aws s3api list-objects --bucket test-path
 aws s3 ls --recursive s3://test-path --summarize
 aws s3 sync s3://source s3://target
 aws s3 sync s3://source s3://target --exact-timestamps => sync compares size, so if size is same it won't sync. need to compare timestamps
+~~~
+
+### Install the Session Manager plugin for the AWS CLI
+https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html#install-plugin-debian<br>
+
+~~~
+curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
+sudo dpkg -i session-manager-plugin.deb
+
+### Check plugin
+session-manager-plugin
+
+The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
 ~~~
 
 - Remove versioned s3
