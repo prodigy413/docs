@@ -205,3 +205,31 @@ $ git config --global credential.credentialStore plaintext
 $ git clone https://xxxxxxx.git
 Select access token
 ~~~
+
+### github command
+https://github.com/cli/cli<br>
+https://github.com/cli/cli/releases<br>
+https://cli.github.com/manual/<br>
+
+~~~
+$ wget https://github.com/cli/cli/releases/download/v2.2.0/gh_2.2.0_linux_amd64.tar.gz
+$ tar xvf gh_2.2.0_linux_amd64.tar.gz
+$ sudo cp gh_2.2.0_linux_amd64/bin/gh /usr/local/bin/
+$ gh --version
+gh version 2.2.0 (2021-10-25)
+https://github.com/cli/cli/releases/tag/v2.2.0
+
+$ gh auth login
+? What account do you want to log into? GitHub.com
+? What is your preferred protocol for Git operations? SSH
+? Upload your SSH public key to your GitHub account? /home/obi/.ssh/github.pub
+? How would you like to authenticate GitHub CLI? Paste an authentication token
+Tip: you can generate a Personal Access Token here https://github.com/settings/tokens
+The minimum required scopes are 'repo', 'read:org', 'admin:public_key'.
+? Paste your authentication token: ****************************************
+- gh config set -h github.com git_protocol ssh
+✓ Configured git protocol
+✓ Uploaded the SSH key to your GitHub account: /home/obi/.ssh/github.pub
+✓ Logged in as obi
+~~~
+
