@@ -1,3 +1,13 @@
+### MariaDB client Install
+- It will install mysql and mysqldump commands<br>
+https://mariadb.com/products/skysql/docs/clients/mariadb-clients/mariadb-client/
+
+~~~
+sudo apt install mariadb-client
+~~~
+
+### Mysql client install
+
 ~~~
 sudo apt install mysql-client
 ~~~
