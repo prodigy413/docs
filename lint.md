@@ -21,4 +21,6 @@ curl -sS https://webinstall.dev/shfmt | bash
 or
 
 go install mvdan.cc/sh/v3/cmd/shfmt@latest
+
+shfmt -l -w xxxx.sh
 ~~~
