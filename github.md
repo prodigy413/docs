@@ -233,3 +233,9 @@ The minimum required scopes are 'repo', 'read:org', 'admin:public_key'.
 ✓ Logged in as obi
 ~~~
 
+https://qiita.com/tippy/items/79ca3f7b7bcac1d92136<br>
+https://docs.github.com/en/rest/reference/actions#list-workflow-runs<br>
+
+~~~
+gh api repos/user/terraform-test/actions/workflows
+~~~
