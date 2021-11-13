@@ -530,3 +530,35 @@ jobs:
 
 ### Storage status check
 Your account > [Settings] > [Billing & plans] : Storage for Actions and Packages
+
+### Trigger manually
+
+~~~
+name: Manually triggered workflow
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'username'
+        required: false
+        default: 'Obi'
+
+jobs:
+  say_hello:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Hello ${{ github.event.inputs.name }}!"
+~~~
+
+~~~
+gh api -X POST repos/prodigy413/20211113_github_actions_test/actions/workflows/test.yml/dispatches --input -<<< '{"ref":"main","inputs":{"name":"test"}}'
+curl \
+  -H "Authorization: token $TOKEN" \
+  -X POST \
+  -H "Accept: application/vnd.github.v3+json" \
+  https://api.github.com/repos/prodigy413/20211113_github_actions_test/actions/workflows/test.yml/dispatches \
+  -d '{"ref":"main","inputs":{"name":"test"}}'
+~~~
+
+
