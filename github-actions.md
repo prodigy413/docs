@@ -532,6 +532,8 @@ jobs:
 Your account > [Settings] > [Billing & plans] : Storage for Actions and Packages
 
 ### Trigger manually
+https://docs.github.com/en/rest/reference/actions#create-a-workflow-dispatch-event<br>
+https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#workflow_dispatch<br>
 
 ~~~
 name: Manually triggered workflow
@@ -552,7 +554,7 @@ jobs:
 ~~~
 
 ~~~
-gh api -X POST repos/user/github_actions_test/actions/workflows/test.yml/dispatches --input -<<< '{"ref":"main","inputs":{"name":"test"}}'
+gh api -X POST repos/prodigy413/20211113_github_actions_test/actions/workflows/test.yml/dispatches --input -<<< '{"ref":"main","inputs":{"name":"test"}}'
 curl \
   -H "Authorization: token $TOKEN" \
   -X POST \
@@ -561,4 +563,14 @@ curl \
   -d '{"ref":"main","inputs":{"name":"test"}}'
 ~~~
 
+~~~
+gh api repos/prodigy413/20211113_github_actions_test/actions/runs
+curl \
+  -H "Authorization: token $TOKEN" \
+  -X GET \
+  -H "Accept: application/vnd.github.v3+json" \
+  https://api.github.com/repos/prodigy413/20211113_github_actions_test/actions/runs
+~~~
+
+https://www.fixes.pub/program/314451.html<br>
 
