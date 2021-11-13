@@ -552,12 +552,12 @@ jobs:
 ~~~
 
 ~~~
-gh api -X POST repos/prodigy413/20211113_github_actions_test/actions/workflows/test.yml/dispatches --input -<<< '{"ref":"main","inputs":{"name":"test"}}'
+gh api -X POST repos/user/github_actions_test/actions/workflows/test.yml/dispatches --input -<<< '{"ref":"main","inputs":{"name":"test"}}'
 curl \
   -H "Authorization: token $TOKEN" \
   -X POST \
   -H "Accept: application/vnd.github.v3+json" \
-  https://api.github.com/repos/prodigy413/20211113_github_actions_test/actions/workflows/test.yml/dispatches \
+  https://api.github.com/repos/user/github_actions_test/actions/workflows/test.yml/dispatches \
   -d '{"ref":"main","inputs":{"name":"test"}}'
 ~~~
 
