@@ -572,5 +572,34 @@ curl \
   https://api.github.com/repos/prodigy413/20211113_github_actions_test/actions/runs
 ~~~
 
+~~~
+### Get workflow list
+gh -R github.com/prodigy413/20211113_github_actions_test workflow list
+
+### Display detail
+gh -R github.com/prodigy413/20211113_github_actions_test workflow view 2970
+
+### Display latest 5 runs
+gh -R github.com/prodigy413/20211113_github_actions_test run list -w test.yml -L 5
+
+### Display detail
+gh -R github.com/prodigy413/20211113_github_actions_test run view 1458114683
+
+### Get job detail
+gh -R github.com/prodigy413/20211113_github_actions_test run view --job 4198738474
+
+### Get job log
+gh -R github.com/prodigy413/20211113_github_actions_test run view --log --job 4198738474
+
+### Run workflow
+gh -R github.com/prodigy413/20211113_github_actions_test --ref main workflow run 'Manually triggered workflow' --json -<<< '{"name":"test"}'
+
+### See runs
+gh -R github.com/prodigy413/20211113_github_actions_test run list --workflow=test.yml
+
+### Watch run
+gh -R github.com/prodigy413/20211113_github_actions_test run watch --exit-status && notify-send "run is done!"
+~~~
+
 https://www.fixes.pub/program/314451.html<br>
 
