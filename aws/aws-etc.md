@@ -32,3 +32,6 @@ https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-pol
 
 ### AWS Lambda & Good aws site - DENET
 https://blog.denet.co.jp/lambda-python-zip/
+
+### VPC Limitations
+https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
