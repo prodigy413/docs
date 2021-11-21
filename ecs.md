@@ -18,3 +18,6 @@ https://docs.aws.amazon.com/AmazonECS/latest/developerguide/example_task_definit
 
 ### ECS Deep Dive
 https://d1.awsstatic.com/webinars/jp/pdf/services/20190731_AWS-BlackBelt_AmazonECS_DeepDive_Rev.pdf
+
+### ECS cloudwatch agent
+https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy_servicelens_CloudWatch_agent_deploy_ECS.html
