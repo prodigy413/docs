@@ -119,7 +119,7 @@ https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html
 
 ~~~
 ## You should set username AWS not your IAM user.
-aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com
+aws ecr get-login-password --region ap-northeast-1 | sudo docker login --username AWS --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com
 
 ## image name format should be repository:tag. (ex: obi-repo:1.0 not obi-repo/nginx:1.0)
 docker build -t aws_account_id.dkr.ecr.region.amazonaws.com/repository:1.0 .
