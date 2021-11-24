@@ -143,6 +143,10 @@ aws ecs stop-task --cluster xx --task xx > /dev/null
 aws ecs update-service --cluster xx --service xx --force-new-deployment > /dev/null
 
 aws ecs wait services-stable --cluster xx --service xx
+
+aws ecs list-tasks --desired-status 'RUNNING' --cluster xx --service xx
+
+aws ecs execute-command --cluster xx --task xx --container xx --interactive --command "bash"
 ~~~
 
 ### ECS
