@@ -35,3 +35,6 @@ https://blog.denet.co.jp/lambda-python-zip/
 
 ### VPC Limitations
 https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
+
+### ALB & Docker Healthcheck
+https://blog.msysh.me/posts/2020/08/behavior_of_ecs_by_alb_and_docker_health_check.html
