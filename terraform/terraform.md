@@ -105,3 +105,9 @@ https://www.m3tech.blog/entry/2020/07/27/150000
 
 ### Terraform AWS Cloud Control Provider
 https://www.hashicorp.com/blog/announcing-terraform-aws-cloud-control-provider-tech-preview
+
+### Terraform Templates
+https://htnosm.hatenablog.com/entry/2018/05/04/090000
+
+### etc
+https://htnosm.hatenablog.com/entry/2017/04/10/090000
