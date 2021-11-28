@@ -173,11 +173,69 @@ https://stackoverflow.com/questions/60030262/s3-static-website-w-bluegreen-deplo
 https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html
 
 ~~~
+## current cloudfront: E2EADWJC134IMV, current.cloudfront.net
+## second cloudfront: E7A040MHQTSGY, second.cloudfront.net
 ## Check which cloudfront is using cname cf.great-obi.com. target Cloudfront(E7A040MHQTSGY) is meaningless
 aws cloudfront list-conflicting-aliases --alias cf.great-obi.com --distribution-id E2EADWJC134IMV
 
+{
+    "ConflictingAliasesList": {
+        "MaxItems": 100,
+        "Quantity": 1,
+        "Items": [
+            {
+                "Alias": "cf.great-obi.com",
+                "DistributionId": "*******5PBZ4YV",
+                "AccountId": "******555252"
+            }
+        ]
+    }
+}
+
+### when from current to second ###
+## route 53: add record
+## change TTL shorter for faster dns info update
+_www.example.com TXT <second cloudfront url>
+ex) _cf.great-obi.com TXT second.cloudfront.net
+
 ## Change cname cf.great-obi.com to Cloudfront(E7A040MHQTSGY)
 aws cloudfront associate-alias --alias cf.great-obi.com --target-distribution-id E7A040MHQTSGY
+
+{
+    "ConflictingAliasesList": {
+        "MaxItems": 100,
+        "Quantity": 1,
+        "Items": [
+            {
+                "Alias": "cf.great-obi.com",
+                "DistributionId": "******SC2IL6S",
+                "AccountId": "******555252"
+            }
+        ]
+    }
+}
+
+### when from second to current ###
+## route 53: add record
+_www.example.com TXT <second cloudfront url>
+ex) _cf.great-obi.com TXT current.cloudfront.net
+
+## Change cname cf.great-obi.com to Cloudfront(E2EADWJC134IMV)
+aws cloudfront associate-alias --alias cf.great-obi.com --target-distribution-id E2EADWJC134IMV
+
+{
+    "ConflictingAliasesList": {
+        "MaxItems": 100,
+        "Quantity": 1,
+        "Items": [
+            {
+                "Alias": "cf.great-obi.com",
+                "DistributionId": "*******5PBZ4YV",
+                "AccountId": "******555252"
+            }
+        ]
+    }
+}
 ~~~
 
 ### S3
