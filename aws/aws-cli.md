@@ -236,6 +236,9 @@ aws cloudfront associate-alias --alias cf.great-obi.com --target-distribution-id
         ]
     }
 }
+
+## get cloudfront distribution id
+aws cloudfront list-distributions --query "DistributionList.Items[*].{id:Id,origin:Origins.Items[0].Id}[?origin=='s3-test-bucket']" --output text
 ~~~
 
 ### S3
