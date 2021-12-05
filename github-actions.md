@@ -94,6 +94,14 @@ $ curl \
   -H "Accept: application/vnd.github.v3+json" \
   https://api.github.com/repos/prodigy413/action-test/dispatches \
   -d '{"event_type":"test-run","client_payload":{"env":"production"}}'
+
+## Token
+https://docs.github.com/en/rest/reference/actions#create-a-registration-token-for-a-repository--code-samples
+
+$ curl \
+  -X POST \
+  -H "Accept: application/vnd.github.v3+json" \
+  https://api.github.com/repos/prodigy413/docs/actions/runners/registration-token
 ~~~
 
 ~~~yaml
