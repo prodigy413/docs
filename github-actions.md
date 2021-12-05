@@ -611,3 +611,10 @@ gh -R github.com/prodigy413/20211113_github_actions_test run watch --exit-status
 
 https://www.fixes.pub/program/314451.html<br>
 
+### Self hosted runners
+https://testdriven.io/blog/github-actions-docker/
+
+~~~
+
+~~~
+
