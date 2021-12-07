@@ -14,6 +14,9 @@ AWS Access Key ID [None]: xxxxxxxx
 AWS Secret Access Key [None]: xxxxxxx
 Default region name [None]: ap-northeast-1
 Default output format [None]: json
+
+## specific profile
+aws configure --profile user02
 ~~~
 
 ### User
