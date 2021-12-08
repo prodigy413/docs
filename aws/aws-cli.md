@@ -17,6 +17,9 @@ Default output format [None]: json
 
 ## specific profile
 aws configure --profile user02
+
+cat ~/.aws/credentials
+cat ~/.aws/config
 ~~~
 
 ### User
