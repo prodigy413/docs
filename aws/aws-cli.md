@@ -20,6 +20,8 @@ aws configure --profile user02
 
 cat ~/.aws/credentials
 cat ~/.aws/config
+
+aws s3 ....... --profile user02
 ~~~
 
 ### User
