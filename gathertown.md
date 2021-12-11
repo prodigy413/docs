@@ -6,3 +6,5 @@ https://gather.town/signin
 
 ### configuration
 - Create Avatar and set name
+- Create office
+- Set audio
