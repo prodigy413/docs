@@ -111,3 +111,15 @@ https://htnosm.hatenablog.com/entry/2018/05/04/090000
 
 ### etc
 https://htnosm.hatenablog.com/entry/2017/04/10/090000
+
+### VS Code terraform fmt
+https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform<br>
+
+~~~
+### settings.json
+{
+    "[terraform]": {
+        "editor.formatOnSave": true
+    }
+}
+~~~
