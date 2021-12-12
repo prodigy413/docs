@@ -612,9 +612,20 @@ gh -R github.com/prodigy413/20211113_github_actions_test run watch --exit-status
 https://www.fixes.pub/program/314451.html<br>
 
 ### Self hosted runners
-https://testdriven.io/blog/github-actions-docker/
+https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners<br>
+https://testdriven.io/blog/github-actions-docker/<br>
+
+- Install on linux
 
 ~~~
+$ mkdir actions-runner && cd actions-runner# Download the latest runner package
+$ curl -o actions-runner-linux-x64-2.285.1.tar.gz -L https://github.com/actions/runner/releases/download/v2.285.1/actions-runner-linux-x64-2.285.1.tar.gz# 
+$ echo "5fd98e1009ed13783d17cc73f13ea9a55f21b45ced915ed610d00668b165d3b2  actions-runner-linux-x64-2.285.1.tar.gz" | shasum -a 256 -c# Extract the installer
+$ tar xzf ./actions-runner-linux-x64-2.285.1.tar.gz
+$ ./config.sh --url https://github.com/prodigy413/docs --token ADFGQYWFBH5HKSBFXRNFBATBWXZRM# Last step, run it!
+$ ./run.sh
 
+# Use this YAML in your workflow file for each job
+runs-on: self-hosted
 ~~~
 
