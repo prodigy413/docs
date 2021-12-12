@@ -171,6 +171,12 @@ time dd if=/dev/zero of=zero.txt bs=4KiB count=1; time sync
 time dd if=zero.txt of=/dev/null
 ~~~
 
+### Ubuntu ssh
+
+~~~
+sudo apt install openssh-server
+~~~
+
 ### Commands reference
 https://hydrocul.github.io/wiki/commands/date.html
 
