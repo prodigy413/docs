@@ -1,0 +1,13 @@
+name: Self Host Runner Test
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  say_hello:
+    runs-on: test-obi-runner
+    steps:
+      - name: Hello jobs
+        run: |
+          echo "Hello"
