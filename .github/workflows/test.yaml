@@ -6,7 +6,7 @@ on:
 
 jobs:
   say_hello:
-    runs-on: test-obi-runner
+    runs-on: [self-hosted, test-obi-runner]
     steps:
       - name: Hello jobs
         run: |
