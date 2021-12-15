@@ -540,6 +540,7 @@ jobs:
 Your account > [Settings] > [Billing & plans] : Storage for Actions and Packages
 
 ### Trigger manually
+########<b>Default Branch must have yml workflow</b>#######<br><br>
 https://docs.github.com/en/rest/reference/actions#create-a-workflow-dispatch-event<br>
 https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#workflow_dispatch<br>
 
