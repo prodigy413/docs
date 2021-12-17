@@ -11,3 +11,5 @@ jobs:
       - name: Hello jobs
         run: |
           echo "Hello"
+          sleep 60
+          echo "Complete"
