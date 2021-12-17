@@ -177,6 +177,10 @@ time dd if=zero.txt of=/dev/null
 sudo apt install openssh-server
 ~~~
 
+### bash dictionary
+https://www.xmodulo.com/key-value-dictionary-bash.html<br>
+https://qiita.com/sayama0402/items/6385b9019f37031eb2b9
+
 ### Commands reference
 https://hydrocul.github.io/wiki/commands/date.html
 
