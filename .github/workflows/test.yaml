@@ -8,8 +8,15 @@ jobs:
   say_hello:
     runs-on: [self-hosted, obi-test]
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.1.0
       - name: Hello jobs
         run: |
+          terraform version
           echo "Hello"
           sleep 60
           echo "main"
