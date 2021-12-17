@@ -12,4 +12,5 @@ jobs:
         run: |
           echo "Hello"
           sleep 60
+          echo "main"
           echo "Complete"
