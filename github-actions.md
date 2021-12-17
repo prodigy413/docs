@@ -626,6 +626,9 @@ $ tar xzf ./actions-runner-linux-x64-2.285.1.tar.gz
 $ ./config.sh --url https://github.com/prodigy413/docs --token ADFGQYWFBH5HKSBFXRNFBATBWXZRM# Last step, run it!
 $ ./run.sh
 
+# Run as a service
+sudo ./svc.sh install
+
 # Use this YAML in your workflow file for each job
 runs-on: self-hosted
 ~~~
