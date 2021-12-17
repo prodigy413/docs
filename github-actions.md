@@ -615,6 +615,7 @@ https://www.fixes.pub/program/314451.html<br>
 ### Self hosted runners
 https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners<br>
 https://testdriven.io/blog/github-actions-docker/<br>
+https://docs.github.com/en/actions/hosting-your-own-runners/configuring-the-self-hosted-runner-application-as-a-service
 
 - Install on linux
 
