@@ -171,6 +171,13 @@ time dd if=/dev/zero of=zero.txt bs=4KiB count=1; time sync
 time dd if=zero.txt of=/dev/null
 ~~~
 
+~~~bash
+### -a and -o are not recommended
+if { [ "$1" = "a" ] && [ "$2" != "b" ] } || { [ "$1" = "c" ] || [ "$1" = "d" ] }; then
+  echo "test"
+fi
+~~~
+
 ### Ubuntu ssh
 
 ~~~
