@@ -14,6 +14,7 @@ https://aws.amazon.com/jp/blogs/news/under-the-hood-firelens-for-amazon-ecs-task
 
 ### Firelens & Datadog
 https://www.datadoghq.com/blog/collect-fargate-logs-with-firelens/<br>
+https://docs.datadoghq.com/ja/integrations/ecs_fargate/?tab=fluentbitandfirelens<br>
 
 ~~~
 
