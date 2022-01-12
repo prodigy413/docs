@@ -1,3 +1,4 @@
+~~~
 # https://docs.github.com/ja/actions/advanced-guides/using-github-cli-in-workflows
 # https://cli.github.com/manual/gh_release_create
 
@@ -23,3 +24,4 @@ jobs:
           gh release create "$TAGS" --target main -F changelog.md ./all-files.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+~~~
