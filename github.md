@@ -210,6 +210,7 @@ Select access token
 https://github.com/cli/cli<br>
 https://github.com/cli/cli/releases<br>
 https://cli.github.com/manual/<br>
+https://github.com/cli/cli/blob/trunk/docs/install_linux.md<br>
 
 ~~~
 $ wget https://github.com/cli/cli/releases/download/v2.2.0/gh_2.2.0_linux_amd64.tar.gz
