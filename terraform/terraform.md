@@ -13,6 +13,9 @@ https://www.terraform-best-practices.com/
 ### Terraform Github actions sample
 https://learn.hashicorp.com/tutorials/terraform/github-actions
 
+### Terraform log configuration
+https://www.suse.com/support/kb/doc/?id=000020022
+
 ### Download Command
 https://www.terraform.io/downloads.html
 
