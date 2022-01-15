@@ -11,6 +11,7 @@ https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy_servicelen
 https://docs.aws.amazon.com/AmazonECS/latest/userguide/firelens-using-fluentbit.html<br>
 https://gallery.ecr.aws/aws-observability/aws-for-fluent-bit<br>
 https://aws.amazon.com/jp/blogs/news/under-the-hood-firelens-for-amazon-ecs-tasks/<br>
+https://gallery.ecr.aws/aws-observability/aws-for-fluent-bit<br>
 
 ### Firelens & Datadog
 https://www.datadoghq.com/blog/collect-fargate-logs-with-firelens/<br>
