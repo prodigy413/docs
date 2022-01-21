@@ -7,7 +7,13 @@ https://github.com/koalaman/shellcheck<br>
 ~~~
 sudo apt install shellcheck
 shellcheck xxx.sh
+
+or
+
+In vscode, search shellcheck
+settings > Extensions > ShellCheck > Executable Path > set file path 
 ~~~
+
 
 https://github.com/mvdan/sh<br>
 
