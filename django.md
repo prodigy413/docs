@@ -1,3 +1,7 @@
+### Getting started
+https://docs.djangoproject.com/en/4.0/intro/<br>
+https://docs.djangoproject.com/en/4.0/intro/tutorial01/<br>
+
 ### samples
 - views.py
 ~~~python
