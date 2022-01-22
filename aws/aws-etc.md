@@ -14,10 +14,6 @@ $ sudo systemctl status amazon-cloudwatch-agent.service
 $ cat /var/log/amazon/amazon-cloudwatch-agent/amazon-cloudwatch-agent.log
 ~~~
 
-### Check console login address
-AWS Console - [IAM] - [Dashboard] - Sign-in URL for IAM users in this account<br>
-My test lab: https://844065555252.signin.aws.amazon.com/console
-
 ### Fargate
 - Fargate platform version<br>
 https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
