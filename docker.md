@@ -71,4 +71,14 @@ $ docker volume prune => Remove all volumes except for running containers
 $ docker volume ls
 $ docker system prune => Remove all except for running containers
 $ docker system prune --force
+
+## Remove all containers
+## -v: Remove all associated volumes
+## -f: Forces the removal. Like, if any containers is running, you need -f to remove them.
+$ docker rm -vf $(docker ps -a -q)
+
+## Remove all images
+## -a: for all containers, even not running, (or images)
+## -q: to remove all the details other than the ID of containers (or images)
+$ docker rmi -f $(docker images -a -q)
 ~~~
