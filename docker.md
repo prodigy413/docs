@@ -70,4 +70,5 @@ $ docker system df
 $ docker volume prune => Remove all volumes except for running containers
 $ docker volume ls
 $ docker system prune => Remove all except for running containers
+$ docker system prune --force
 ~~~
