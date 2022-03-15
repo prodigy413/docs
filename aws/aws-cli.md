@@ -5,6 +5,9 @@ https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
+
+## Update
+sudo ./aws/install --update
 ~~~
 
 ### aws configure
@@ -22,6 +25,15 @@ cat ~/.aws/credentials
 cat ~/.aws/config
 
 aws s3 ....... --profile user02
+~~~
+
+### Install eksctl
+https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html
+
+~~~
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+eksctl version
 ~~~
 
 ### User
@@ -283,4 +295,18 @@ bucket.object_versions.all().delete()
 
 # if you want to remove bucket
 #bucket.delete()
+~~~
+
+### Find AZ
+
+~~~
+aws ec2 describe-availability-zones --region ap-northeast-1
+~~~
+
+### Create kubeconfig
+
+- Path: .kube/config
+
+~~~
+aws eks update-kubeconfig --region ap-northeast-1 --name my-cluster
 ~~~
