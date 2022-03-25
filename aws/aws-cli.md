@@ -310,3 +310,16 @@ aws ec2 describe-availability-zones --region ap-northeast-1
 ~~~
 aws eks update-kubeconfig --region ap-northeast-1 --name my-cluster
 ~~~
+
+### Check Lists
+
+~~~
+aws iam list-roles --query Roles[].[RoleName,Arn] --output table
+aws iam list-policies --query Policies[].[PolicyName,Arn] --output table
+aws ec2 describe-instances
+aws ec2 describe-security-groups
+aws ec2 describe-subnets
+aws ec2 describe-vpcs
+aws logs describe-log-groups
+aws opensearch list-domain-names
+~~~
