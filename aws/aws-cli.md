@@ -326,4 +326,6 @@ aws opensearch list-domain-names
 aws rds describe-db-instances
 aws cloudfront list-distributions
 aws lambda list-functions
+EBS
+EIP
 ~~~
