@@ -191,3 +191,11 @@ https://qiita.com/sayama0402/items/6385b9019f37031eb2b9
 ### Commands reference
 https://hydrocul.github.io/wiki/commands/date.html
 
+### fdisk
+
+~~~
+fdisk -l
+fdisk /dev/sdb
+
+mkfs -t ext4 /dev/sdb1
+~~~
