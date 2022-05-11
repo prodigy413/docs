@@ -270,6 +270,7 @@ aws s3api list-objects --bucket test-path
 aws s3 ls --recursive s3://test-path --summarize
 aws s3 sync s3://source s3://target
 aws s3 sync s3://source s3://target --exact-timestamps => sync compares size, so if size is same it won't sync. need to compare timestamps
+aws s3api list-buckets --query "Buckets[].Name"
 ~~~
 
 ### Install the Session Manager plugin for the AWS CLI
