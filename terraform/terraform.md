@@ -126,3 +126,11 @@ https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform<br>
     }
 }
 ~~~
+
+### Terraform Console / Terminal
+
+~~~
+terraform console
+echo 'split(",", "foo,bar,baz")' | terraform console
+exit
+~~~
