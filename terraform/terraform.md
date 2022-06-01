@@ -66,6 +66,16 @@ $ terraform apply
 
 $ terraform destroy
 
+### Get current configurations
+
+Usage: terraform show [options] [file]
+
+$ terraform show
+
+$ terraform show -json
+
+$ terraform show -json | jq
+
 ### Add auto yes flag
 $ terraform apply -auto-approve
 
