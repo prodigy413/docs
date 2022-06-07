@@ -302,6 +302,7 @@ bucket.object_versions.all().delete()
 ### Find AZ
 
 ~~~
+aws ec2 describe-availability-zones --all-availability-zones
 aws ec2 describe-availability-zones --region ap-northeast-1
 ~~~
 
