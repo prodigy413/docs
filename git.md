@@ -122,6 +122,9 @@ $ git restore --staged test.txt
 ## Reset removes commit
 $ git reset 325gsfsd
 
+## Reset last commit
+$ git reset --soft HEAD^
+
 ## Revert commit
 ## Revert creates new commit
 $ git revert 325gsfsd
