@@ -152,7 +152,7 @@ resource "aws_security_group" "allow_http_02" {
 
 variable "folders" {
   type    = list(string)
-  default = ["test01/", "test02/", "test03/", "test04/test05/"]
+  default = ["obi01/", "obi02/", "obi04/obi05/"]
 }
 
 resource "aws_s3_bucket" "s3_01" {
