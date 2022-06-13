@@ -13,16 +13,16 @@ resource "aws_instance" "ec2" {
   iam_instance_profile = var.iam_instance_profile
 
   capacity_reservation_specification {
-    capacity_reservation_preference = "none"
+    capacity_reservation_preference = "nxxxxxone"
   }
 
   root_block_device {
     delete_on_termination = true
     encrypted             = true
-    iops                  = 3000
-    volume_size           = 50
+    iops                  = 0
+    volume_size           = 0
     volume_type           = "gp3"
-    throughput            = 125
+    throughput            = 0
 
     tags = {
       Name = var.ebs_name
@@ -36,7 +36,7 @@ resource "aws_instance" "ec2" {
     {
       Name = var.name
     },
-    var.terraform_tag
+    var.terra_tag
   )
 }
 
@@ -73,11 +73,11 @@ variable "ebs_name" {
   default     = ""
 }
 
-variable "terraform_tag" {
+variable "terra_tag" {
   description = "Tag for Terraform managed resources"
   type        = map(string)
   default = {
-    Terraform = "managed"
+    Terra = "managed"
   }
 }
 
@@ -147,11 +147,11 @@ variable "ebs_name" {
   default     = "test-ebs"
 }
 
-variable "terraform_tag" {
+variable "terra_tag" {
   description = "Tag for Terraform managed resources"
   type        = map(string)
   default = {
-    Terraform = "managed"
+    Terra = "managed"
   }
 }
 
@@ -221,13 +221,13 @@ resource "aws_efs_file_system" "efs" {
     {
       Name = var.name
     },
-    var.terraform_tag,
-    var.awsbackup_tag
+    var.terra_tag,
+    var.backup_tag
   )
 
   encrypted        = true
-  performance_mode = "generalPurpose"
-  throughput_mode  = "bursting"
+  performance_mode = "xxxxxxx"
+  throughput_mode  = "xxxxxxx"
 
 }
 
@@ -245,27 +245,15 @@ resource "aws_efs_replication_configuration" "efs" {
   source_file_system_id = aws_efs_file_system.efs.id
 
   destination {
-    region     = "ap-northeast-3"
+    region     = "ap-northeast-1"
     kms_key_id = "/aws/elasticfilesystem"
   }
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_mount_target
-resource "aws_efs_mount_target" "aza" {
+resource "aws_efs_mount_target" "az1" {
   file_system_id  = aws_efs_file_system.efs.id
-  subnet_id       = var.subnet_id_w1sa
-  security_groups = var.security_group_id_work01
-}
-
-resource "aws_efs_mount_target" "azc" {
-  file_system_id  = aws_efs_file_system.efs.id
-  subnet_id       = var.subnet_id_w1sc
-  security_groups = var.security_group_id_work01
-}
-
-resource "aws_efs_mount_target" "azd" {
-  file_system_id  = aws_efs_file_system.efs.id
-  subnet_id       = var.subnet_id_w1sd
+  subnet_id       = var.subnet_id_az1
   security_groups = var.security_group_id_work01
 }
 
@@ -282,41 +270,29 @@ variable "name" {
   default     = ""
 }
 
-variable "terraform_tag" {
+variable "terra_tag" {
   description = "Tag for Terraform managed resources"
   type        = map(string)
   default = {
-    Terraform = null
+    Terra = null
   }
 }
 
-variable "awsbackup_tag" {
-  description = "Tag for AWSBackup managed resources"
+variable "backup_tag" {
+  description = "Tag for Backup managed resources"
   type        = map(string)
   default = {
-    AWSBackup = null
+    Backup = null
   }
 }
 
-variable "subnet_id_w1sa" {
+variable "subnet_id_az1" {
   description = "The ID of subnet"
   type        = string
   default     = null
 }
 
-variable "subnet_id_w1sc" {
-  description = "The ID of subnet"
-  type        = string
-  default     = null
-}
-
-variable "subnet_id_w1sd" {
-  description = "The ID of subnet"
-  type        = string
-  default     = null
-}
-
-variable "security_group_id_work01" {
+variable "security_group_id_test" {
   description = "The ID of security group"
   type        = list(string)
   default     = [null]
@@ -371,11 +347,11 @@ variable "ebs_name" {
   default     = "test-ebs"
 }
 
-variable "terraform_tag" {
+variable "terra_tag" {
   description = "Tag for Terraform managed resources"
   type        = map(string)
   default = {
-    Terraform = "managed"
+    Terra = "managed"
   }
 }
 
