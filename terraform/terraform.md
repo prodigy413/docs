@@ -146,3 +146,11 @@ terraform console
 echo 'split(",", "foo,bar,baz")' | terraform console
 exit
 ~~~
+
+### Terraform: Error acquiring the state lock: ConditionalCheckFailedException
+
+~~~
+terraform force-unlock xxxxxxx-xxxxxxx-xxxxxxxxx
+terraform force-unlock -force xxxxxxx-xxxxxxx-xxxxxxxxx
+terraform plan -lock=false
+~~~
