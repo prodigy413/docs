@@ -340,7 +340,7 @@ aws ec2 describe-addresses
 ~~~
 aws elbv2 describe-load-balancers --query LoadBalancers[].LoadBalancerName
 aws elbv2 describe-load-balancers --query LoadBalancers[].DNSName
-aws elbv2 describe-load-balancers --query LoadBalancers[].LoadBalancersArn
+aws elbv2 describe-load-balancers --query LoadBalancers[].LoadBalancerArn
 aws elbv2 describe-tags --resource-arns xx --query TagDescriptions[].Tags[].Value
 ~~~
 
