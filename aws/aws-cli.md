@@ -334,3 +334,12 @@ aws ec2 describe-volumes  --query Volumes[].[VolumeId] --output table
 aws ec2 describe-addresses
 
 ~~~
+
+### ALB
+
+~~~
+aws elbv2 describe-load-balancers --query LoadBalancers[].LoadBalancerName
+aws elbv2 describe-load-balancers --query LoadBalancers[].DNSName
+aws elbv2 describe-load-balancers --query LoadBalancers[].LoadBalancersArn
+aws elbv2 describe-tags --resource-arns xx --query TagDescriptions[].Tags[].Value
+~~~
