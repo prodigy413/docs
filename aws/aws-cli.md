@@ -343,3 +343,9 @@ aws elbv2 describe-load-balancers --query LoadBalancers[].DNSName
 aws elbv2 describe-load-balancers --query LoadBalancers[].LoadBalancersArn
 aws elbv2 describe-tags --resource-arns xx --query TagDescriptions[].Tags[].Value
 ~~~
+
+### Security Group
+
+~~~
+aws ec2 describe-security-groups --query 'SEcurityGroups[].{Name:GroupName,ID:GroupId}' --output table
+~~~
