@@ -347,5 +347,5 @@ aws elbv2 describe-tags --resource-arns xx --query TagDescriptions[].Tags[].Valu
 ### Security Group
 
 ~~~
-aws ec2 describe-security-groups --query 'SEcurityGroups[].{Name:GroupName,ID:GroupId}' --output table
+aws ec2 describe-security-groups --query 'SecurityGroups[].{Name:GroupName,ID:GroupId}' --output table
 ~~~
