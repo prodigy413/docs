@@ -354,6 +354,6 @@ aws ec2 describe-security-groups --query 'SecurityGroups[].{Name:GroupName,ID:Gr
 
 ~~~
 aws elbv2 describe-target-groups --load-balancer-arn xxxxxxx
-aws elbv2 describe-target-health ---target-group-arn xxxxxxx
+aws elbv2 describe-target-health --target-group-arn xxxxxxx
 ~~~
 
