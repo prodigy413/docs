@@ -349,3 +349,11 @@ aws elbv2 describe-tags --resource-arns xx --query TagDescriptions[].Tags[].Valu
 ~~~
 aws ec2 describe-security-groups --query 'SecurityGroups[].{Name:GroupName,ID:GroupId}' --output table
 ~~~
+
+### Target Group
+
+~~~
+aws elbv2 describe-target-groups --load-balancer-arn xxxxxxx
+aws elbv2 describe-target-health ---target-group-arn xxxxxxx
+~~~
+
