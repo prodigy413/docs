@@ -34,4 +34,9 @@ pod/nginx-7dfb57d6d9-mzbv7 condition met
 pod/nginx-7dfb57d6d9-s2wqn condition met
 ~~~
 
+### Get API Info
+
+~~~
+kubectl api-versions
+~~~
 
