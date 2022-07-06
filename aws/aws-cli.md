@@ -357,3 +357,11 @@ aws elbv2 describe-target-groups --load-balancer-arn xxxxxxx
 aws elbv2 describe-target-health --target-group-arn xxxxxxx
 ~~~
 
+### ECR
+
+~~~
+aws ecr describe-repositories --query repositories[].repositoryName
+aws ecr describe-repositories --query repositories[].repositoryUri
+aws ecr describe-images --repository-name
+~~~
+
