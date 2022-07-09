@@ -40,3 +40,8 @@ pod/nginx-7dfb57d6d9-s2wqn condition met
 kubectl api-versions
 ~~~
 
+### Get API Resources / shortname
+
+~~~
+kubectl api-resources
+~~~
