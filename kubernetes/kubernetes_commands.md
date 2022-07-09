@@ -45,3 +45,10 @@ kubectl api-versions
 ~~~
 kubectl api-resources
 ~~~
+
+### Find CRD shortname 
+
+~~~
+kubectl describe crd xxxx
+find "shortNames"
+~~~
