@@ -36,27 +36,6 @@ on linux_amd64
 
 ~~~
 
- - AWS samples
-~~~tf
-provider "aws" {
-  region  = "ap-northeast-1"
-}
-
-resource "aws_iam_user" "test_user" {
-  name = "obi"
-  #path = "/system/"
-
-  tags = {
-    Name = "Jinhyuk Choi"
-  }
-}
-
-resource "aws_iam_user_policy_attachment" "test-attach" {
-  user       = aws_iam_user.test_user.name
-  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
-}
-~~~
-
 ~~~
 $ terraform init
 
