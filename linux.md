@@ -138,21 +138,26 @@ grep -r '192.168.1.254' /etc/
 - Link: https://qiita.com/hana_shin/items/0a3a615274717c89c0a4<br>
 
 ~~~
-sudo apt install stress-ng
-stress-ng -V
+### Install on CentOS
+$ yum -y install stress-ng
 
-## CPU100%
-## -c is process count
+### Install on Ubuntu
+$ sudo apt-get install -y stress-ng
+
+$ stress-ng -V
+
+### Use CPU 100%
+### -c is process count
 stress-ng -c 1
 
-## CPU50%
+### Use CPU 50%
 stress-ng -c 1 -l 50
 
-## memory
-## -m is process count
+### Use Memory 1G for 10s, 1 process
+### -m is process count
 stress-ng -m 1 --vm-bytes 1G --timeout 10
 
-## Disk
+### Use Disk 2G
 stress-ng -d 1 --hdd-bytes 2G
 ~~~
 
