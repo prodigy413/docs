@@ -133,3 +133,11 @@ terraform force-unlock xxxxxxx-xxxxxxx-xxxxxxxxx
 terraform force-unlock -force xxxxxxx-xxxxxxx-xxxxxxxxx
 terraform plan -lock=false
 ~~~
+
+### Debug
+
+<https://www.terraform.io/internals/debugging>
+
+~~~
+export TF_LOG=TRACE
+~~~
