@@ -338,6 +338,7 @@ aws ec2 describe-addresses
 ### ALB
 
 ~~~
+aws elbv2 describe-load-balancers --names xxxxxxx
 aws elbv2 describe-load-balancers --query LoadBalancers[].LoadBalancerName
 aws elbv2 describe-load-balancers --query LoadBalancers[].DNSName
 aws elbv2 describe-load-balancers --query LoadBalancers[].LoadBalancerArn
