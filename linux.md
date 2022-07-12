@@ -250,3 +250,13 @@ jq '.items | map({ name: .name, yen: .price })'
 ~~~
 
 - Reference: https://qiita.com/takeshinoda@github/items/2dec7a72930ec1f658af
+
+### ENV
+
+~~~
+### Set env
+export XXX=YYYY
+
+### Remove env
+unset XXX
+~~~
