@@ -199,13 +199,27 @@ $ git switch branch-name
 ## but not integrated
 $ git fetch origin
 $ git checkout origin/xxxx
-
 ~~~
 
 ### Pull
 ~~~
 ## Actually update
 ## git pull origin branch
+~~~
+
+### Rebase
+~~~
+## You're working in local
+## Main branch updated
+## download updated data
+git checkout master
+git pull upstream master
+or
+git fetch origin main
+
+git checkout my-feature-branch
+git rebase origin/main
+git push -f
 ~~~
 
 ### Prevent merge until github actions passed
