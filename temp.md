@@ -1,4 +1,3 @@
-~~~
 ### data.tf
 
 ~~~
@@ -1764,8 +1763,4 @@ variable "terraform_tag" {
     Terraform = "managed"
   }
 }
-~~~
-
-
-
 ~~~
