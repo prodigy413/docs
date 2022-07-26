@@ -376,6 +376,7 @@ aws iam list-attached-group-policies --group-name xxxx
 aws iam get-policy --policy-arn xxxxxxxx
 aws iam list-policies --query 'Policies[].{Name:PolicyName, Arn:Arn}'
 aws iam get-policy-version --version-id v1 --policy-arn arn:aws:iam::aws:policy/AmazonGlacierReadOnlyAccess
+aws iam get-policy --policy-arn arn:aws:iam::aws:policy/aws-service-role/ClientVPNServiceRolePolicy --query Policy.DefaultVersionId --output text
 
 aws iam list-roles --query 'Roles[].{Name:RoleName, Arn:Arn}'
 aws iam list-attached-role-policies --role-name AWSServiceRoleForLambdaReplicator
