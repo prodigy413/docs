@@ -380,4 +380,5 @@ aws iam get-policy --policy-arn arn:aws:iam::aws:policy/aws-service-role/ClientV
 
 aws iam list-roles --query 'Roles[].{Name:RoleName, Arn:Arn}'
 aws iam list-attached-role-policies --role-name AWSServiceRoleForLambdaReplicator
+aws iam get-role --role-name AWSBackupDefaultServiceRole --query Role.AssumeRolePolicyDocument
 ~~~
