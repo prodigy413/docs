@@ -366,3 +366,16 @@ aws ecr describe-repositories --query repositories[].repositoryUri
 aws ecr describe-images --repository-name
 ~~~
 
+### IAM
+
+~~~
+aws iam list-groups --query 'Groups[].{Name:GroupName, Arn:Arn}'
+aws iam list-group-policies --group-name xxxx
+aws iam list-attached-group-policies --group-name xxxx
+
+aws iam list-policies --query 'Policies[].{Name:PolicyName, Arn:Arn}'
+aws iam get-policy-version --version-id v1 --policy-arn arn:aws:iam::aws:policy/AmazonGlacierReadOnlyAccess
+
+aws iam list-roles --query 'Roles[].{Name:RoleName, Arn:Arn}'
+aws iam list-attached-role-policies --role-name AWSServiceRoleForLambdaReplicator
+~~~
