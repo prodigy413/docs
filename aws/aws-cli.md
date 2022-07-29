@@ -382,3 +382,9 @@ aws iam list-roles --query 'Roles[].{Name:RoleName, Arn:Arn}'
 aws iam list-attached-role-policies --role-name AWSServiceRoleForLambdaReplicator
 aws iam get-role --role-name AWSBackupDefaultServiceRole --query Role.AssumeRolePolicyDocument
 ~~~
+
+### LogGroup
+
+~~~
+aws logs describe-log-groups --log-group-name-prefix xxxxx --query 'logGroups[].{Name:logGroupName,Retention:retentionInDays}' --output table
+~~~
