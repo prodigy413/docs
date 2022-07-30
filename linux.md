@@ -260,3 +260,24 @@ export XXX=YYYY
 ### Remove env
 unset XXX
 ~~~
+
+### Timezone
+
+~~~
+$ timedatectl list-timezones | grep -i tokyo
+Asia/Tokyo
+
+$ timedatectl
+               Local time: Sat 2022-07-30 09:38:57 UTC
+           Universal time: Sat 2022-07-30 09:38:57 UTC
+                 RTC time: Sat 2022-07-30 09:38:57    
+                Time zone: Etc/UTC (UTC, +0000)       
+System clock synchronized: yes                        
+              NTP service: active                     
+          RTC in local TZ: no
+
+$ sudo timedatectl set-timezone Asia/Tokyo
+
+$ cat /etc/timezone 
+Asia/Tokyo
+~~~
