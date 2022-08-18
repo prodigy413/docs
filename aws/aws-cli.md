@@ -400,3 +400,23 @@ aws efs describe-mount-targets --file-system-id fs-xxxxx
 aws efs describe-mount-target-security-groups --mount-target-id fsmt-xxxxx
 aws efs describe-access-points --file-system-id fs-xxxxx
 ~~~
+
+### S3
+
+~~~
+aws s3api get-bucket-acl --bucket
+aws s3api get-bucket-encryption --bucket
+aws s3api get-bucket-lifecycle-configuration --bucket
+aws s3api get-bucket-location --bucket
+aws s3api get-bucket-logging --bucket
+aws s3api get-bucket-notification-configuration --bucket
+aws s3api get-bucket-ownership-controls --bucket
+aws s3api get-bucket-policy --bucket
+aws s3api get-bucket-policy-status --bucket
+aws s3api get-bucket-replication --bucket
+aws s3api get-bucket-request-payment --bucket
+aws s3api get-bucket-tagging --bucket
+aws s3api get-bucket-versioning --bucket
+aws s3api get-bucket-website --bucket
+aws s3api get-public-access-block --bucket
+~~~
