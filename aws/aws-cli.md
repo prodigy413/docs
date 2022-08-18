@@ -390,3 +390,13 @@ aws iam get-role --role-name AWSBackupDefaultServiceRole --query Role.AssumeRole
 ~~~
 aws logs describe-log-groups --log-group-name-prefix xxxxx --query 'logGroups[].{Name:logGroupName,Retention:retentionInDays}' --output table
 ~~~
+
+### EFS
+
+~~~
+aws efs describe-file-systems
+aws efs describe-backup-policy --file-system-id fs-xxxxx
+aws efs describe-mount-targets --file-system-id fs-xxxxx
+aws efs describe-mount-target-security-groups --mount-target-id fsmt-xxxxx
+aws efs describe-access-points --file-system-id fs-xxxxx
+~~~
