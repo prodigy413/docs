@@ -151,3 +151,12 @@ export TF_LOG=TRACE
 terraform state rm -dry-run aws_cloudfront_origin_access_identity.cloud_front_01
 terraform state rm aws_cloudfront_origin_access_identity.cloud_front_01
 ~~~
+
+### Change resource name of state
+
+<https://www.terraform.io/cli/commands/state/mv>
+
+~~~
+terraform state mv -dry-run aws_cloudfront_origin_access_identity.test module.oai.aws_cloudfront_origin_access_identity.cloud_front_01[0]
+terraform state mv -dry-run aws_s3_bucket_policy.policy_01 module.oai.aws_s3_bucket_policy.policy_01[0]
+~~~
