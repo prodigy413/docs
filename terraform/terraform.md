@@ -141,3 +141,13 @@ terraform plan -lock=false
 ~~~
 export TF_LOG=TRACE
 ~~~
+
+
+### Remove resource from state
+
+<https://www.terraform.io/cli/commands/state/rm>
+
+~~~
+terraform state rm -dry-run aws_cloudfront_origin_access_identity.cloud_front_01
+terraform state rm aws_cloudfront_origin_access_identity.cloud_front_01
+~~~
