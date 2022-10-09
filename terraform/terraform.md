@@ -16,26 +16,6 @@ https://learn.hashicorp.com/tutorials/terraform/github-actions
 ### Terraform log configuration
 https://www.suse.com/support/kb/doc/?id=000020022
 
-### Download Command
-https://www.terraform.io/downloads.html
-
-~~~
-$ wget https://releases.hashicorp.com/terraform/1.0.2/terraform_1.0.2_linux_amd64.zip
-
-$ unzip terraform_1.0.2_linux_amd64.zip
-Archive:  terraform_1.0.2_linux_amd64.zip
-  inflating: terraform               
-
-$ rm -rf terraform_1.0.2_linux_amd64.zip
-
-$ sudo mv terraform /usr/local/bin/
-
-$ terraform version
-Terraform v1.0.2
-on linux_amd64
-
-~~~
-
 ~~~
 $ terraform init
 
