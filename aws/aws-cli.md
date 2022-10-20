@@ -125,6 +125,11 @@ aws ec2 create-image --instance-id "i-xxxxxxxxxxx" --name "My server" --descript
       --tag-specifications \
        'ResourceType=image,Tags=[{Key=Name,Value=cpi-dev-tyo-ami-test1},{Key=Env,Value=cpi-dev}]' \
        'ResourceType=snapshot,Tags=[{Key=Name,Value=cpi-dev-tyo-ami-test1},{Key=Env,Value=cpi-dev}]'
+
+https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/create-tags.html
+aws ec2 create-tags \
+    --resources ami-1a2b3c4d i-1234567890abcdef0 \
+    --tags Key=webserver,Value=   Key=stack,Value=Production
 ~~~
 
 ### Vpc
