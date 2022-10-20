@@ -119,6 +119,9 @@ $ aws ec2 copy-image \
       --source-region ap-northeast-1 \
       --source-image-id ami-xxxxxxxxxx \
       --description "This is my copied image."
+      --tag-specifications \
+       'ResourceType=image,Tags=[{Key=Name,Value=cpi-dev-tyo-ami-test1},{Key=Env,Value=cpi-dev}]' \
+       'ResourceType=snapshot,Tags=[{Key=Name,Value=cpi-dev-tyo-ami-test1},{Key=Env,Value=cpi-dev}]'
 
 https://awscli.amazonaws.com/v2/documentation/api/2.0.34/reference/ec2/create-image.html
 aws ec2 create-image --instance-id "i-xxxxxxxxxxx" --name "My server" --description "An AMI for my server"
