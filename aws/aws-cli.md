@@ -121,7 +121,7 @@ $ aws ec2 copy-image \
       --description "This is my copied image."
 
 https://awscli.amazonaws.com/v2/documentation/api/2.0.34/reference/ec2/create-image.html
-aws ec2 create-image --instance-id i-xxxxxxxxxxx--name "My server" --description "An AMI for my server"
+aws ec2 create-image --instance-id "i-xxxxxxxxxxx" --name "My server" --description "An AMI for my server"
 ~~~
 
 ### Vpc
