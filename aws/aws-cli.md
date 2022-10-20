@@ -111,6 +111,17 @@ $ aws ec2 describe-instances
 $ aws ec2 describe-instances --filters "Name=instance-type,Values=t2.micro" --query "Reservations[].Instances[].Tags"
 
 $ aws ec2 describe-instances --filters "Name=instance-type,Values=t2.micro" --query "Reservations[].Instances[].InstanceId"
+
+https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/copy-image.html
+$ aws ec2 copy-image \
+      --region ap-northeast-1 \
+      --name test-image \
+      --source-region ap-northeast-1 \
+      --source-image-id ami-xxxxxxxxxx \
+      --description "This is my copied image."
+
+https://awscli.amazonaws.com/v2/documentation/api/2.0.34/reference/ec2/create-image.html
+aws ec2 create-image --instance-id i-xxxxxxxxxxx--name "My server" --description "An AMI for my server"
 ~~~
 
 ### Vpc
