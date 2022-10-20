@@ -112,6 +112,11 @@ $ aws ec2 describe-instances --filters "Name=instance-type,Values=t2.micro" --qu
 
 $ aws ec2 describe-instances --filters "Name=instance-type,Values=t2.micro" --query "Reservations[].Instances[].InstanceId"
 
+$ aws ec2 describe-instances --filters "Name=tag:Name,Values=test-ec2" --query "Reservations[].Instances[].InstanceId" --output text
+
+https://awscli.amazonaws.com/v2/documentation/api/2.1.29/reference/ec2/describe-images.html
+$ aws ec2 describe-images --filters "Name=tag:Name,Values=test-ec2" --query Images[].ImageId --output text
+
 https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/copy-image.html
 $ aws ec2 copy-image \
       --region ap-northeast-1 \
