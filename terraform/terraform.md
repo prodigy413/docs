@@ -146,3 +146,11 @@ terraform state mv -dry-run aws_s3_bucket_policy.policy_01 module.oai.aws_s3_buc
 ~~~
 ^.*(word1|word2|word3).*\n
 ~~~
+
+### Terraform Console
+
+~~~
+terraform init
+terraform console
+exit
+~~~
