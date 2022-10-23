@@ -115,7 +115,17 @@ $ aws ec2 describe-instances --filters "Name=instance-type,Values=t2.micro" --qu
 $ aws ec2 describe-instances --filters "Name=tag:Name,Values=test-ec2" --query "Reservations[].Instances[].InstanceId" --output text
 
 https://awscli.amazonaws.com/v2/documentation/api/2.1.29/reference/ec2/describe-images.html
+
 $ aws ec2 describe-images --filters "Name=tag:Name,Values=test-ec2" --query Images[].ImageId --output text
+
+$ aws ec2 describe-images --filters "Name=tag:Name,Values=test-ec2" "Name=is-public,Values=false" --query "Images[?CreationDate>`2022-10-21`]"
+
+$ aws ec2 describe-images \
+--filters "Name=tag:Name,Values=test-ec2" "Name=is-public,Values=false" \
+--query "Images[?CreationDate>`2022-10-21`] | sort_by(@, &CreationDate)[].[CreationDate,ImageId]"
+
+# Windows
+$ aws ec2 describe-images --filters "Name=tag:Name,Values=test-ec2" "Name=is-public,Values=false" --query "Images[?CreationDate>'`2022-10-21`']"
 
 https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/copy-image.html
 $ aws ec2 copy-image \
