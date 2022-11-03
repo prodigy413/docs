@@ -167,7 +167,7 @@ $ aws logs get-log-events --log-group-name xxxxx --log-stream-name xxxxxxx
 
 $ aws logs tail <log-group-name>
 $ aws logs tail --follow <log-group-name>
-$ aws logs tail <log-group-name> --log-stream-names <log-stream-name> --since <time>
+$ aws logs tail <log-group-name> --log-stream-names <log-stream-name> --filter ERROR --since 1h
 ~~~
 
 ### Check service support
