@@ -162,6 +162,12 @@ https://dev.classmethod.jp/articles/operate-cloudwatch-log-group-using-cli-for-b
 
 ~~~
 $ aws logs describe-log-groups --query "logGroups[].logGroupName"
+$ aws logs describe-log-streams --query logStreams[].logStreamName --log-group-name xxxxxxxx
+$ aws logs get-log-events --log-group-name xxxxx --log-stream-name xxxxxxx
+
+$ aws logs tail <log-group-name>
+$ aws logs tail --follow <log-group-name>
+$ aws logs tail <log-group-name> --log-stream-names <log-stream-name> --since <time>
 ~~~
 
 ### Check service support
