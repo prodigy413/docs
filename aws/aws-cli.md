@@ -360,6 +360,7 @@ aws eks update-kubeconfig --region ap-northeast-1 --name my-cluster
 
 ~~~
 aws iam list-roles --query Roles[].[RoleName,Arn] --output table
+aws iam list-roles --query "Roles[?RoleName=='test-role'].Arn"
 aws iam list-policies --query Policies[].[PolicyName,Arn] --output table
 aws iam list-users --query Users[].[UserName,Arn] --output table
 aws ec2 describe-instances
