@@ -147,6 +147,8 @@ https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/create-ta
 aws ec2 create-tags \
     --resources ami-1a2b3c4d i-1234567890abcdef0 \
     --tags Key=webserver,Value=   Key=stack,Value=Production
+    
+aws ec2 describe-network-interfaces --filters Name=addresses.private-ip-address,Values=<IPv4 address>
 ~~~
 
 ### Vpc
