@@ -149,6 +149,10 @@ aws ec2 create-tags \
     --tags Key=webserver,Value=   Key=stack,Value=Production
     
 aws ec2 describe-network-interfaces --filters Name=addresses.private-ip-address,Values=<IPv4 address>
+
+## See below.
+## https://dev.classmethod.jp/articles/awscli-wait-instance-status-ok-include-all-instances/
+aws ec2 wait instance-status-ok --include-all-instances
 ~~~
 
 ### Vpc
