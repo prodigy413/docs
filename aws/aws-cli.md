@@ -43,6 +43,12 @@ $ aws iam list-users --query Users[].[UserName,Arn] --output table
 
 ## Get current user info
 $ aws sts get-caller-identity
+
+aws iam create-user --user-name xxxxx --tags Key=Name,Value=xxxxx
+aws iam create-login-profile --user-name xxxxx --password 'xxxxxxxxxx' --password-reset-required
+aws iam attach-user-policy --user-name xxxxx --policy-arn xxxxx
+aws iam add-user-to-group --user-name xxxxx --group-name xxxxx
+aws iam create-access-key --user-name xxxxx
 ~~~
 
 ### Group
