@@ -38,9 +38,10 @@ eksctl version
 
 ### User
 ~~~
-$ aws iam create-user --user-name test
 $ aws iam list-users --query Users[].[UserName,Arn] --output table
-
+$ aws iam list-groups-for-user --user-name xxxx
+$ aws iam list-user-policies --user-name test
+$ aws iam list-attached-user-policies --user-name test
 ## Get current user info
 $ aws sts get-caller-identity
 
