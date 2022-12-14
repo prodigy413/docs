@@ -476,3 +476,9 @@ aws s3api get-bucket-versioning --bucket
 aws s3api get-bucket-website --bucket
 aws s3api get-public-access-block --bucket
 ~~~
+
+### Route53
+
+~~~
+aws route53 list-hosted-zones-by-name --dns-name "xxxxxxxxxxxxxx.com"
+~~~
