@@ -150,6 +150,12 @@ aws ec2 create-image --instance-id "i-xxxxxxxxxxx" --name "My server" --descript
        'ResourceType=image,Tags=[{Key=Name,Value=obi-ami-test1},{Key=Env,Value=obi-dev}]' \
        'ResourceType=snapshot,Tags=[{Key=Name,Value=obi-test1},{Key=Env,Value=obi-dev}]'
 
+https://awscli.amazonaws.com/v2/documentation/api/2.1.29/reference/ec2/wait/image-available.html
+aws ec2 wait image-available --image-ids "ami-xxxxxxx"
+
+AMI_ID=$(aws ec2 create-image --instance-id "i-0741b17288aa0e445" --name "obi-test-ami-01" --description "obi-test-ami-01" --tag-specifications 'ResourceType=image,Tags=[{Key=Name,Value=obi-test-ami-01}]' --output text)
+aws ec2 wait image-available --image-ids ${AMI_ID}
+
 https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/create-tags.html
 aws ec2 create-tags \
     --resources ami-1a2b3c4d i-1234567890abcdef0 \
