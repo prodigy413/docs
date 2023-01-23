@@ -488,3 +488,14 @@ aws s3api get-public-access-block --bucket
 ~~~
 aws route53 list-hosted-zones-by-name --dns-name "xxxxxxxxxxxxxx.com"
 ~~~
+
+
+### WAF
+
+~~~
+aws wafv2 list-web-acls --scope REGIONAL --query WebACLs[].Name
+
+## Get Rules
+aws wafv2 get-web-acl --name test-WebACL-01 --scope REGIONAL --id xxxxxxxxxx
+aws wafv2 get-web-acl --name test-WebACL-01 --scope REGIONAL --id xxxxxxxxxx --query WebACL.Rules[].Name
+~~~
