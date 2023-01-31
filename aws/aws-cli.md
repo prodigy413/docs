@@ -187,6 +187,8 @@ $ aws logs get-log-events --log-group-name xxxxx --log-stream-name xxxxxxx
 $ aws logs tail <log-group-name>
 $ aws logs tail --follow <log-group-name>
 $ aws logs tail <log-group-name> --log-stream-names <log-stream-name> --filter ERROR --since 1h
+
+$ aws logs filter-log-events --log-group-name my-group [--log-stream-names LIST_OF_STREAMS_TO_SEARCH] [--start-time 1482197400000] [--end-time 1482217558365] [--filter-pattern VALID_METRIC_FILTER_PATTERN]
 ~~~
 
 ### Check service support
