@@ -1,0 +1,140 @@
+### Check please
+
+<https://coderwall.com/p/lspgjq/list-files-modified-in-the-last-hour-find-command>
+
+### Create files
+
+~~~
+touch test01.txt
+touch test02.txt
+touch test03.txt
+~~~
+
+~~~
+$ ls -l
+total 0
+-rw-rw-r-- 1 obi obi 0 Jun  8 18:04 test01.txt
+-rw-rw-r-- 1 obi obi 0 Jun  8 18:04 test02.txt
+-rw-rw-r-- 1 obi obi 0 Jun  8 18:04 test03.txt
+
+$ touch -m test01.txt
+$ ls -l
+total 0
+-rw-rw-r-- 1 obi obi 0 Jun  8 19:06 test01.txt
+-rw-rw-r-- 1 obi obi 0 Jun  8 18:04 test02.txt
+-rw-rw-r-- 1 obi obi 0 Jun  8 18:04 test03.txt
+$ stat test01.txt 
+  File: test01.txt
+  Size: 0         	Blocks: 0          IO Block: 4096   regular empty file
+Device: 8,2	Inode: 1343689     Links: 1
+Access: (0664/-rw-rw-r--)  Uid: ( 1000/     obi)   Gid: ( 1000/     obi)
+Access: 2023-06-08 18:04:24.645201878 +0900
+Modify: 2023-06-08 19:06:49.226627726 +0900
+Change: 2023-06-08 19:06:49.226627726 +0900
+ Birth: 2023-06-08 18:04:24.645201878 +0900
+
+$ touch -am test02.txt 
+$ stat test02.txt 
+  File: test02.txt
+  Size: 0         	Blocks: 0          IO Block: 4096   regular empty file
+Device: 8,2	Inode: 1343696     Links: 1
+Access: (0664/-rw-rw-r--)  Uid: ( 1000/     obi)   Gid: ( 1000/     obi)
+Access: 2023-06-08 19:09:42.337987522 +0900
+Modify: 2023-06-08 19:09:42.337987522 +0900
+Change: 2023-06-08 19:09:42.337987522 +0900
+ Birth: 2023-06-08 18:04:27.845325990 +0900
+
+$ touch -c -t YYYYMMDDhhmm FILENAME
+$ touch -c -t 202306061235 test03.txt
+$ ls -l
+total 0
+-rw-rw-r-- 1 obi obi 0 Jun  8 19:06 test01.txt
+-rw-rw-r-- 1 obi obi 0 Jun  8 19:09 test02.txt
+-rw-rw-r-- 1 obi obi 0 Jun  6 12:35 test03.txt
+$ stat test03.txt 
+  File: test03.txt
+  Size: 0         	Blocks: 0          IO Block: 4096   regular empty file
+Device: 8,2	Inode: 1343891     Links: 1
+Access: (0664/-rw-rw-r--)  Uid: ( 1000/     obi)   Gid: ( 1000/     obi)
+Access: 2023-06-06 12:35:00.000000000 +0900
+Modify: 2023-06-06 12:35:00.000000000 +0900
+Change: 2023-06-08 19:12:07.331452026 +0900
+ Birth: 2023-06-08 18:04:29.973408342 +0900
+
+$ touch -d '15 Feb' test01.txt
+$ stat test01.txt
+  File: test01.txt
+  Size: 0         	Blocks: 0          IO Block: 4096   regular empty file
+Device: 8,2	Inode: 1343689     Links: 1
+Access: (0664/-rw-rw-r--)  Uid: ( 1000/     obi)   Gid: ( 1000/     obi)
+Access: 2023-02-15 00:00:00.000000000 +0900
+Modify: 2023-02-15 00:00:00.000000000 +0900
+Change: 2023-06-08 19:15:54.382835208 +0900
+ Birth: 2023-06-08 18:04:24.645201878 +0900
+
+$ touch test02.txt -r test01.txt
+$ stat test02.txt 
+  File: test02.txt
+  Size: 0         	Blocks: 0          IO Block: 4096   regular empty file
+Device: 8,2	Inode: 1343696     Links: 1
+Access: (0664/-rw-rw-r--)  Uid: ( 1000/     obi)   Gid: ( 1000/     obi)
+Access: 2023-02-15 00:00:00.000000000 +0900
+Modify: 2023-02-15 00:00:00.000000000 +0900
+Change: 2023-06-08 19:20:54.983172473 +0900
+ Birth: 2023-06-08 18:04:27.845325990 +0900
+
+~~~
+
+### For Test
+
+- sample01
+
+~~~
+touch -m test01.txt
+touch -c -t 202306061235 test02.txt
+touch -c -t 202306081235 test03.txt
+~~~
+
+- sample01
+
+~~~
+touch -c -t 202306082015 test01.txt
+touch -c -t 202306082014 test02.txt
+touch -c -t 202306082013 test03.txt
+~~~
+
+~~~
+### List all files older than 1 days
+$ find . -type f -mtime +1
+./test03.txt
+
+### Remove
+$ find . -type f -mtime +1 -delete 
+
+$ find . -name "*.txt" -type f -mtime +1
+./test03.txt
+
+### Remove
+$ find . -name "*.txt" -type f -mtime +1 -delete 
+
+### Remove directories
+find .-type d -mtime +1 -exec rm -rf {} \; 
+
+### List all files younger than 10 minutes
+$ find . -type f -mmin -10
+
+
+~~~
+
+~~~
+$ ls -l
+total 0
+-rw-rw-r-- 1 obi obi 0 Jun  8 19:55 test01.txt
+-rw-rw-r-- 1 obi obi 0 Jun  8 20:05 test02.txt
+-rw-rw-r-- 1 obi obi 0 Jun  8 20:00 test03.txt
+
+$ date ; find . -type f -mmin -5
+Thu Jun  8 08:07:23 PM JST 2023
+./test02.txt
+./test03.txt
+~~~
