@@ -1,107 +1,80 @@
 ~~~
-helm install logs-agent --dry-run oci://icr.io/ibm-observe/logs-agent-helm \
---version 1.6.3 --values logs-values.yaml -n ibm-observe --create-namespace
+from collections import defaultdict
+import csv
+from json import loads
+from subprocess import run
 
-helm install logs-agent oci://icr.io/ibm-observe/logs-agent-helm \
---version 1.6.3 --values logs-values.yaml -n ibm-observe --create-namespace
 
-ibmcloud ks cluster get -c test-cluster --output json | jq '{name: .name, crn: .crn}'
+def run_command(cmd: list) -> dict:
+    result = run(["aws", "iam", *cmd, "--output", "json", "--no-cli-pager"], capture_output=True, text=True)
+    if result.returncode == 0:
+        data = loads(result.stdout)
+        return data
+    else:
+        raise Exception(result.stderr)
 
-ibmcloud resource service-instances --service-name logs -g test -o json | jq '.[] | {name: .name, guid: .guid}'
 
-ibmcloud iam trusted-profile-create test --description "test"
+def get_groups() -> list:
+    data = run_command(["list-groups"])
+    group_names = [group["GroupName"] for group in data["Groups"]]
+    return group_names
 
-ibmcloud iam trusted-profile-policy-create test \
-    --roles Sender \
-    --service-name logs \
-    --service-instance xxxxxxxxx
 
-ibmcloud iam trusted-profile-rule-create test \
-  --name iks-logs-agent \
-  --type Profile-CR \
-  --cr-type ROKS_SA \
-  --conditions claim:crn,operator:EQUALS,value:xxxxxxxxxx \
-  --conditions claim:namespace,operator:EQUALS,value:ibm-observe \
-  --conditions claim:name,operator:EQUALS,value:logs-agent
+def get_group_users(groups: list) -> list:
+    group_users = list()
+    for group in groups:
+        data = run_command(["get-group", "--group-name", group])
+        user_names = [user["UserName"] for user in data["Users"]]
+        group_users.append({"group": group, "users": user_names})
+    return group_users
 
-ibmcloud iam trusted-profiles -o json | jq '.[] | {name: .name, id: .id}'
+
+def get_group_policies(groups: list) -> list:
+    group_policies = list()
+    for group in groups:
+        data = run_command(["list-attached-group-policies", "--group-name", group])
+        policy_names = [policy["PolicyName"] for policy in data["AttachedPolicies"]]
+        group_policies.append({"group": group, "policies": policy_names})
+    return group_policies
+
+
+def build_index(users: list, policies: list) -> dict:
+    idx = defaultdict(lambda: {"users": [], "policies": []})
+    for user in users:
+        idx[user["group"]]["users"] = user["users"]
+    for policy in policies:
+        idx[policy["group"]]["policies"] = policy["policies"]
+    return idx
+
+
+def write_csv(idx: dict, filename: str) -> None:
+    with open(filename, "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["Group", "Users", "Policies"])
+        for group in idx.keys():
+            users = list(idx[group].get("users", []))
+            policies = list(idx[group].get("policies", []))
+            max_rows = max(len(users), len(policies), 1)
+
+            users += [""] * (max_rows - len(users))
+            policies += [""] * (max_rows - len(policies))
+
+            for i in range(max_rows):
+                w.writerow([group if i == 0 else "", users[i], policies[i]])
+
+
+if __name__ == "__main__":
+    groups = get_groups()
+    users = get_group_users(groups)
+    policies = get_group_policies(groups)
+    idx = build_index(users, policies)
+    filename = "/home/obi/test/develop-code/python/aws/iam_group_report.csv"
+    write_csv(idx, filename)
+
+
+
 
 kubectl get cronjobs -A -o custom-columns='NAMESPACE:.metadata.namespace,NAME:.metadata.name,ACTIVE_DEADLINE_SECONDS:.spec.jobTemplate.spec.activeDeadlineSeconds'
-
-apiVersion: batch/v1
-kind: CronJob
-metadata:
-  name: cron01
-  labels:
-    app: cronjob
-spec:
-  schedule: "*/2 * * * *"
-  # concurrencyPolicy: Allow / Forbid / Replace
-  startingDeadlineSeconds: 100
-  successfulJobsHistoryLimit: 5
-  failedJobsHistoryLimit: 5
-  #suspend: true
-  suspend: false
-  jobTemplate:
-    spec:
-      activeDeadlineSeconds: 50
-      template:
-        spec:
-          containers:
-          - name: busybox
-            image: busybox:1.28
-            imagePullPolicy: Always
-            #command: ["/bin/sh",  "-c", "sleep 120 ; echo test"]
-            command: ["/bin/sh",  "-c"]
-            args:
-            - |
-              i=1
-              while [ "$i" -le 80 ]; do
-                echo "Count: $i"
-                i=$((i + 1))
-                sleep 1
-              done
-          #serviceAccountName: cron-sa
-          restartPolicy: Never
-
-from json import loads
-from subprocess import run, call
-
-def check_command(cmd_list):
-    for cmd in cmd_list:
-        try:
-            run([cmd], capture_output=True, text=True)
-        except FileNotFoundError:
-            print(f'Command {cmd} is not found.')
-
-def get_all_api_resource():
-    api = run(["kubectl", "api-resources", "--verbs=list", "--namespaced=true", "-oname"], capture_output=True, text=True)
-    if api.returncode == 0:
-        all_api_name = loads(api.stdout).splte('\n')
-        return all_api_name
-    else:
-        raise Exception('Failed to get api resources.')
-
-def get_all_namespace():
-    ns = run(["kubectl", "get", "ns", "-ojson"], capture_output=True, text=True)
-    if ns.returncode == 0:
-        all_ns_info = loads(ns.stdout)
-        all_ns_name = [item['metadata']['name'] for item in all_ns_info['items']]
-        return all_ns_name
-    else:
-        raise Exception('Failed to get namespace.')
-
-def get_all_deploy(ns):
-    if ns not in get_all_namespace():
-        raise Exception(f'Namespace {ns} is not found.')
-    deploy = run(["kubectl", "get", "deploy", "-ojson", "-n", ns], capture_output=True, text=True)
-    if deploy.returncode == 0:
-        all_deploy_info = loads(deploy.stdout)
-        all_deploy_name = [item['metadata']['name'] for item in all_deploy_info['items']]
-        return all_deploy_name
-    else:
-        raise Exception('Failed to get deploy.')
-
 
 
 
