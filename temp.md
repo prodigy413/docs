@@ -1,4 +1,78 @@
 ~~~
+#!/usr/bin/env python3
+import argparse
+from json import loads
+from os import environ
+from subprocess import run
+import sys
+
+
+def get_resource_group() -> bool:
+    data = run(['ibmcloud', 'target', '-o', "json"], capture_output=True, text=True)
+    if data.returncode == 0:
+        data_dict = loads(data.stdout)
+        if 'resource_group' in data_dict:
+            return True
+        else:
+            return False
+    else:
+        raise Exception(data.stderr)
+
+
+def ibmcloud_login(result: bool) -> None:
+    if result:
+        print("Already logged in.")
+    else:
+        data = run(['ibmcloud', 'login', '-g', 'test'], capture_output=True, text=True)
+        if data.returncode == 0:
+            print(data.stdout)
+        else:
+            raise Exception(data.stderr)
+
+
+def openshift_login() -> None:
+    stg_url = "xxxxxx"
+    prd_url = "xxxxxx"
+    API_KEY = environ.get('IBMCLOUD_API_KEY')
+
+    parser = argparse.ArgumentParser(description='Select environment to log in to OpenShift.')
+    parser.add_argument('-c', '--context', choices=['stg', 'prd'], required=True,
+                        help='Select the environment to log in to (stg or prd)')
+    args = parser.parse_args()
+
+    if args.context == 'stg':
+        url = stg_url
+        namespace = 'test-stg'
+    elif args.context == 'prd':
+        url = prd_url
+        namespace = 'test-prd'
+    else:
+        print(f'Unknown environment: {args.context}', file=sys.stderr)
+        sys.exit(1)
+
+    data = run(['oc', 'login', '-u', 'apikey', '-p', API_KEY, '--server', url], capture_output=True, text=True)
+    if data.returncode == 0:
+        print(data.stdout)
+        check_ns = run(['oc', 'project', namespace], check=True)
+        if check_ns.returncode == 0:
+            print(f"Logged in to OpenShift cluster({args.context}).")
+        else:
+            raise Exception(check_ns.stderr)
+    else:
+        raise Exception(data.stderr)
+
+
+if __name__ == "__main__":
+    result = get_resource_group()
+    ibmcloud_login(result)
+    openshift_login()
+
+
+
+
+
+
+
 from collections import defaultdict
 import csv
 from json import loads
