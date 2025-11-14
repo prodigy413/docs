@@ -1,3 +1,4 @@
+~~~
 ibmcloud resource service-instances -o json
 ibmcloud resource service-instances | grep sccwp
 ibmcloud resource service-instance-delete sccwp --recursive
