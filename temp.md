@@ -7,6 +7,28 @@ from subprocess import run
 import sys
 
 
+def flag_check() -> dict:
+    stg_url = "https://c100-e.jp-tok.containers.cloud.ibm.com:30701"
+    prd_url = "https://c100-e.jp-tok.containers.cloud.ibm.com:30702"
+
+    parser = argparse.ArgumentParser(description='Select environment to log in to OpenShift.')
+    parser.add_argument('-c', '--context', choices=['stg', 'prd'], required=True,
+                        help='Select the environment to log in to (stg or prd)')
+    args = parser.parse_args()
+
+    if args.context == 'stg':
+        url = stg_url
+        namespace = 'test-stg'
+        return {'url': url, 'namespace': namespace, 'env': args.context}
+    elif args.context == 'prd':
+        url = prd_url
+        namespace = 'test-prd'
+        return {'url': url, 'namespace': namespace, 'env': args.context}
+    else:
+        print(f'Unknown environment: {args.context}', file=sys.stderr)
+        sys.exit(1)
+
+
 def get_resource_group() -> bool:
     data = run(['ibmcloud', 'target', '-o', "json"], capture_output=True, text=True)
     if data.returncode == 0:
@@ -30,32 +52,16 @@ def ibmcloud_login(result: bool) -> None:
             raise Exception(data.stderr)
 
 
-def openshift_login() -> None:
-    stg_url = "xxxxxx"
-    prd_url = "xxxxxx"
+def openshift_login(login_data: dict) -> None:
     API_KEY = environ.get('IBMCLOUD_API_KEY')
 
-    parser = argparse.ArgumentParser(description='Select environment to log in to OpenShift.')
-    parser.add_argument('-c', '--context', choices=['stg', 'prd'], required=True,
-                        help='Select the environment to log in to (stg or prd)')
-    args = parser.parse_args()
-
-    if args.context == 'stg':
-        url = stg_url
-        namespace = 'test-stg'
-    elif args.context == 'prd':
-        url = prd_url
-        namespace = 'test-prd'
-    else:
-        print(f'Unknown environment: {args.context}', file=sys.stderr)
-        sys.exit(1)
-
-    data = run(['oc', 'login', '-u', 'apikey', '-p', API_KEY, '--server', url], capture_output=True, text=True)
+    data = run(['oc', 'login', '-u', 'apikey', '-p', API_KEY, '--server', login_data['url']],
+               capture_output=True, text=True)
     if data.returncode == 0:
         print(data.stdout)
-        check_ns = run(['oc', 'project', namespace], check=True)
+        check_ns = run(['oc', 'project', login_data['namespace']], check=True)
         if check_ns.returncode == 0:
-            print(f"Logged in to OpenShift cluster({args.context}).")
+            print(f"Logged in to OpenShift cluster({login_data['env']}).")
         else:
             raise Exception(check_ns.stderr)
     else:
@@ -63,9 +69,11 @@ def openshift_login() -> None:
 
 
 if __name__ == "__main__":
+    login_data = flag_check()
     result = get_resource_group()
     ibmcloud_login(result)
-    openshift_login()
+    openshift_login(login_data)
+
 
 
 
