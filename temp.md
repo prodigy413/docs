@@ -1,92 +1,15 @@
-~~~
-#!/usr/bin/env python3
-import argparse
-import json
-import os
-import subprocess
-from typing import Dict
+ibmcloud resource service-instances -o json
+ibmcloud resource service-instances | grep sccwp
+ibmcloud resource service-instance-delete sccwp --recursive
 
-ENV_CONFIG = {
-    "stg": {
-        "url": "https://c100-e.jp-tok.containers.cloud.ibm.com:30701",
-        "namespace": "test-stg",
-    },
-    "prd": {
-        "url": "https://c100-e.jp-tok.containers.cloud.ibm.com:30702",
-        "namespace": "test-prd",
-    },
-}
+ibmcloud iam trusted-profiles
+ibmcloud iam trusted-profiles | grep sccwp
+ibmcloud iam trusted-profile-delete sccwp-1
+ibmcloud iam trusted-profile-delete sccwp-2
+ibmcloud iam trusted-profiles
 
-
-def parse_args() -> Dict[str, str]:
-    parser = argparse.ArgumentParser(
-        description="Select environment to log in to OpenShift."
-    )
-    parser.add_argument(
-        "-c",
-        "--context",
-        choices=["stg", "prd"],
-        required=True,
-        help="Select the environment to log in to (stg or prd)",
-    )
-    args = parser.parse_args()
-    cfg = ENV_CONFIG[args.context]
-    return {"env": args.context, **cfg}
-
-
-def run_cmd(cmd: list[str]) -> subprocess.CompletedProcess:
-    try:
-        return subprocess.run(
-            cmd,
-            check=True,
-            text=True,
-            capture_output=True,
-        )
-    except subprocess.CalledProcessError as e:
-        msg = e.stderr or e.stdout or str(e)
-        raise RuntimeError(msg) from e
-
-
-def has_resource_group() -> bool:
-    result = run_cmd(["ibmcloud", "target", "-o", "json"])
-    data = json.loads(result.stdout or "{}")
-    return "resource_group" in data
-
-
-def ibmcloud_login() -> None:
-    if has_resource_group():
-        print("Already logged in to IBM Cloud.")
-        return
-
-    result = run_cmd(["ibmcloud", "login", "-g", "test"])
-    if result.stdout:
-        print(result.stdout, end="")
-
-
-def openshift_login(login_data: Dict[str, str]) -> None:
-    api_key = os.environ.get("IBMCLOUD_API_KEY")
-    if not api_key:
-        raise RuntimeError("IBMCLOUD_API_KEY is not set.")
-
-    result = run_cmd(
-        ["oc", "login", "-u", "apikey", "-p", api_key, "--server", login_data["url"]]
-    )
-    if result.stdout:
-        print(result.stdout, end="")
-
-    run_cmd(["oc", "project", login_data["namespace"]])
-    print(f"Logged in to OpenShift cluster ({login_data['env']}).")
-
-
-def main() -> None:
-    login_data = parse_args()
-    ibmcloud_login()
-    openshift_login(login_data)
-
-
-if __name__ == "__main__":
-    main()
-
+ibmcloud resource service-instance-delete app-config-sccwp
+ibmcloud resource service-instances -o json
 
 
 
