@@ -12,269 +12,261 @@ from time import time
 
 def run_cmd(cmd_args: list) -> list:
     """Run command and return parsed JSON output."""
-
     try:
+        # ibmcloudコマンド実行
+        cmd = ["ibmcloud"] + cmd_args + ["--output", "json"]
         result = subprocess.run(
-            ["ibmcloud"] + cmd_args + ["--output", "json"],
+            cmd,
             text=True,
             capture_output=True,
         )
         if result.returncode == 0:
+            # 結果が空の場合は空リストを返す
+            if not result.stdout.strip():
+                return []
             return json.loads(result.stdout)
         else:
-            print(result.stderr)
-            sys.exit(1)
+            # エラー時も処理を止めずに空を返すか、必要ならログ出力
+            print(f"Error running command {' '.join(cmd)}: {result.stderr}")
+            return []
     except FileNotFoundError:
         print('Command ibmcloud is not found.')
         sys.exit(1)
     except json.JSONDecodeError:
-        print("Failed to parse JSON output.")
-        sys.exit(1)
+        print(f"Failed to parse JSON output for command: {' '.join(cmd)}")
+        return []
 
 
-def get_account_users() -> list:
-    """Get classic user details (ID, username, Email, Status)."""
-
-    # Classic: ibmcloud sl user list
-    data = run_cmd([
-        "sl", "user", "list",
-        "--column", "id",
-        "--column", "username",
-        "--column", "email",
-        "--column", "status",
-    ])
-
+def get_classic_users() -> list:
+    """Get Classic infrastructure user details (ID, Username, Email, Status)."""
+    # Classicユーザーの一覧を取得
+    data = run_cmd(["sl", "user", "list", "--columns", "id,username,email,status"])
     users = []
     for u in data:
-        # status はコマンドによって userStatus.name だったり status だったりするので両対応
-        status_info = u.get("userStatus")
-        if isinstance(status_info, dict):
-            status = status_info.get("name")
-        else:
-            status = u.get("status")
-
+        # Classicのステータス構造に対応
+        status_val = u.get("userStatus", {}).get("name", "Unknown") if isinstance(u.get("userStatus"), dict) else str(u.get("userStatus"))
+        
         user_info = {
             "id": u.get("id"),
             "username": u.get("username"),
             "email": u.get("email"),
-            "status": status,
+            "status": status_val
         }
         if user_info["email"]:
             users.append(user_info)
+    
+    # Email順などでソート
+    return sorted(users, key=lambda x: x["username"])
 
-    return sorted(users, key=lambda x: x["email"])
 
-
-def get_user_permissions(user_id: int) -> dict:
-    """
-    Get classic permissions for a user.
-
-    Returns:
-        dict[str, bool]: { permission_keyName: enabled }
-    """
-
-    # Classic permission: ibmcloud sl user permissions USER_ID
+def get_user_permissions(user_id: int) -> set:
+    """Get permissions for a specific Classic user."""
+    # ユーザー個別の権限を取得
     data = run_cmd(["sl", "user", "permissions", str(user_id)])
-
-    perms = {}
-    for p in data:
-        # JSON のキー名は環境により多少違う可能性があるので、keyName を優先して拾う
-        key_name = p.get("keyName") or p.get("name")
-        if not key_name:
-            continue
-
-        val = p.get("value")
-        if isinstance(val, str):
-            enabled = val.lower() == "true"
-        else:
-            enabled = bool(val)
-
-        perms[key_name] = enabled
-
+    # keyNameを一意な識別子として使用
+    perms = {p.get("keyName") for p in data if p.get("keyName")}
     return perms
 
 
-def map_user_permissions():
-    """
-    Map users to classic permissions.
-
-    Returns:
-        users: list[dict]     ... get_account_users() の結果
-        permissions: list[str]... アカウント内で一度でも登場したすべての permission keyName
-        membership: dict[str, set[str]]
-            email -> { permission keyName, ... }  (有効な permission のみ)
-    """
-
-    users = get_account_users()
-    membership = defaultdict(set)
+def map_classic_data():
+    """Map users to their classic permissions."""
+    users = get_classic_users()
     all_permissions = set()
+    user_permission_map = {}
 
-    for u in users:
-        perms = get_user_permissions(u["id"])
-        for perm_name, enabled in perms.items():
-            all_permissions.add(perm_name)
-            if enabled:
-                membership[u["email"]].add(perm_name)
+    print(f"Found {len(users)} users. Fetching permissions (this may take a while)...")
+    
+    for user in users:
+        u_perms = get_user_permissions(user["id"])
+        user_permission_map[user["username"]] = u_perms
+        all_permissions.update(u_perms)
+    
+    # Permission一覧をソートしてリスト化
+    sorted_permissions = sorted(list(all_permissions))
+    
+    return users, sorted_permissions, user_permission_map
 
-    permissions = sorted(all_permissions)
-    return users, permissions, membership
 
-
-def create_excel(users, permissions, membership):
-    """Create Excel file."""
+def create_excel(users, permissions, user_permission_map):
+    """Create Excel file matching the specified image layout."""
 
     today = datetime.now().strftime('%Y%m%d')
-    # シート名・ファイル名はそのまま利用（見た目のレイアウトには影響しない）
-    sheetname = f"ibmcloud_access_groups_{today}"
+    sheetname = f"ibmcloud_classic_perms_{today}"
     filename = f"{sheetname}.xlsx"
 
     wb = Workbook()
     ws = wb.active
-    ws.title = sheetname
+    ws.title = "Permissions"
 
     # --- Layout Constants ---
-    ID_ROW = 2
+    # 画像に基づき行番号を設定
+    # Row 2: Header (No, username, User1, User2...)
+    # Row 3: Email
+    # Row 4: Status
+    # Row 5~: Permissions
+    
+    HEADER_ROW_START = 2
+    USERNAME_ROW = 2
     EMAIL_ROW = 3
     STATUS_ROW = 4
-    FIRST_GROUP_ROW = 5   # permission 一覧の先頭行
-    FIRST_USER_COL = 4    # ユーザー列の開始列 (D 列)
+    FIRST_PERM_ROW = 5
+    
+    COL_NO = 2       # B列
+    COL_LABEL = 3    # C列
+    FIRST_USER_COL = 4 # D列
 
+    # --- Styles ---
     # Border
     thin_side = Side(style="thin")
     thin_border = Border(
-        left=thin_side,
-        right=thin_side,
-        top=thin_side,
-        bottom=thin_side
+        left=thin_side, right=thin_side, top=thin_side, bottom=thin_side
     )
 
     # Alignment
     align_center = Alignment(horizontal="center", vertical="center")
     align_left = Alignment(horizontal="left", vertical="center")
-    align_bottom_center = Alignment(horizontal="center", vertical="bottom")
-
-    # Header Fill Color
+    
+    # Header Fill Color (Orange/Peach like image)
     header_fill = PatternFill(
-        start_color="FFF8CBAD",
-        end_color="FFF8CBAD",
+        start_color="F4B084", # Excelの「アクセント2」に近い色
+        end_color="F4B084",
         fill_type="solid"
     )
 
-    # --- 1. Header Area ---
+    # --- 1. Header Area (Rows 2-4) ---
 
-    # B2-B4 Merged: "No."
-    no_cell = ws.cell(row=ID_ROW, column=2, value="No.")
-    ws.merge_cells(start_row=ID_ROW, start_column=2, end_row=STATUS_ROW, end_column=2)
-    no_cell.alignment = align_bottom_center
+    # B2: No. (Merged vertically for header rows? Image shows just "No." at B4 level conceptually, 
+    # but let's follow the block style. Image shows No. centered in B2-B4 merge block usually, 
+    # but strictly looking at image: "No." is above numbers. Let's merge B2:B4)
+    ws.merge_cells(start_row=USERNAME_ROW, start_column=COL_NO, end_row=STATUS_ROW, end_column=COL_NO)
+    cell_no = ws.cell(row=USERNAME_ROW, column=COL_NO, value="No.")
+    cell_no.alignment = Alignment(horizontal="center", vertical="bottom") 
 
-    # C column Labels
-    ws.cell(row=ID_ROW, column=3, value="username").fill = header_fill
-    ws.cell(row=EMAIL_ROW, column=3, value="Email").fill = header_fill
-    ws.cell(row=STATUS_ROW, column=3, value="Status").fill = header_fill
+    # C Column Labels
+    ws.cell(row=USERNAME_ROW, column=COL_LABEL, value="username").fill = header_fill
+    ws.cell(row=EMAIL_ROW, column=COL_LABEL, value="Email").fill = header_fill
+    ws.cell(row=STATUS_ROW, column=COL_LABEL, value="Status").fill = header_fill
 
-    # --- 2. User Columns (Row 2-4, Col D~) ---
+    # User Columns (D ~)
     for idx, user in enumerate(users):
         col = FIRST_USER_COL + idx
-
+        
         # Username
-        username_cell = ws.cell(row=ID_ROW, column=col, value=user["username"])
-        username_cell.alignment = align_left
-
-        # Email
-        email_cell = ws.cell(row=EMAIL_ROW, column=col, value=user["email"])
-        email_cell.alignment = align_left
-
+        c_user = ws.cell(row=USERNAME_ROW, column=col, value=user["username"])
+        c_user.alignment = align_left
+        
+        # Email (String only, no hyperlink)
+        c_email = ws.cell(row=EMAIL_ROW, column=col, value=user["email"])
+        c_email.alignment = align_left
+        
         # Status
-        status_cell = ws.cell(row=STATUS_ROW, column=col, value=user["status"])
-        status_cell.alignment = align_left
+        c_status = ws.cell(row=STATUS_ROW, column=col, value=user["status"])
+        c_status.alignment = align_left
 
-    # --- 3. Permission Rows (Row 5~) ---
-    current_row = FIRST_GROUP_ROW
-
+    # --- 2. Permission Rows (Row 5 ~) ---
+    current_row = FIRST_PERM_ROW
+    
     for idx, perm_name in enumerate(permissions, start=1):
-        # No.
-        ws.cell(row=current_row, column=2, value=idx).alignment = Alignment(
-            horizontal="right",
-            vertical="center"
-        )
+        # No. Column (B)
+        c_num = ws.cell(row=current_row, column=COL_NO, value=idx)
+        c_num.alignment = Alignment(horizontal="right", vertical="center")
 
-        # Permission Name (C 列)
-        ws.cell(row=current_row, column=3, value=perm_name).fill = header_fill
+        # Permission Name (C)
+        c_pname = ws.cell(row=current_row, column=COL_LABEL, value=perm_name)
+        c_pname.fill = header_fill # C列はオレンジ背景
+        c_pname.alignment = align_left
 
-        # Checkboxes for each user
+        # Checkboxes (D ~)
         for u_idx, user in enumerate(users):
             col = FIRST_USER_COL + u_idx
-            user_perms = membership.get(user["email"], set())
-
+            user_perms = user_permission_map.get(user["username"], set())
+            
+            # 黒四角(■) or 白四角(□)
             val = "■" if perm_name in user_perms else "□"
             c_mark = ws.cell(row=current_row, column=col, value=val)
             c_mark.alignment = align_center
-
+        
         current_row += 1
 
-    # --- 4. Footer Fixed Rows ---
-
-    # Necessity
+    # --- 3. Footer Fixed Rows (Image Style) ---
+    
+    # ユーザーIDの業務上必要性 (Merged B-C)
     r_nec = current_row
-    ws.cell(row=r_nec, column=2, value="ユーザーIDの業務上必要性").fill = header_fill
-    ws.merge_cells(start_row=r_nec, start_column=2, end_row=r_nec, end_column=3)
+    ws.merge_cells(start_row=r_nec, start_column=COL_NO, end_row=r_nec, end_column=COL_LABEL)
+    c_nec = ws.cell(row=r_nec, column=COL_NO, value="ユーザーIDの業務上必要性")
+    c_nec.fill = header_fill
+    c_nec.alignment = align_left
     current_row += 1
-
-    # Privilege (Merged)
+    
+    # 特権 Section
     r_priv = current_row
-    c_priv = ws.cell(row=r_priv, column=2, value="特権")
+    # "特権" Merged vertically B(r)-B(r+1)
+    ws.merge_cells(start_row=r_priv, start_column=COL_NO, end_row=r_priv+1, end_column=COL_NO)
+    c_priv = ws.cell(row=r_priv, column=COL_NO, value="特権")
     c_priv.fill = header_fill
     c_priv.alignment = align_center
-    ws.merge_cells(start_row=r_priv, start_column=2, end_row=r_priv+1, end_column=2)
 
-    # Yes / No
-    ws.cell(row=r_priv, column=3, value="有").fill = header_fill
-    ws.cell(row=r_priv+1, column=3, value="無").fill = header_fill
-    ws.cell(row=r_priv, column=3).alignment = align_center
-    ws.cell(row=r_priv+1, column=3).alignment = align_center
+    # "有" / "無" in Column C
+    c_yes = ws.cell(row=r_priv, column=COL_LABEL, value="有")
+    c_yes.fill = header_fill
+    c_yes.alignment = align_center
+    
+    c_no = ws.cell(row=r_priv+1, column=COL_LABEL, value="無")
+    c_no.fill = header_fill
+    c_no.alignment = align_center
+    
     current_row += 2
-
-    # Privilege Necessity
+    
+    # 特権の業務上必要性 (Merged B-C)
     r_pnec = current_row
-    ws.cell(row=r_pnec, column=2, value="特権の業務上必要性").fill = header_fill
-    ws.merge_cells(start_row=r_pnec, start_column=2, end_row=r_pnec, end_column=3)
+    ws.merge_cells(start_row=r_pnec, start_column=COL_NO, end_row=r_pnec, end_column=COL_LABEL)
+    c_pnec = ws.cell(row=r_pnec, column=COL_NO, value="特権の業務上必要性")
+    c_pnec.fill = header_fill
+    c_pnec.alignment = align_left
     current_row += 1
 
-    # Retirement Verification
+    # 退職者検証 (Merged B-C)
     r_ret = current_row
-    ws.cell(row=r_ret, column=2, value="退職者検証").fill = header_fill
-    ws.merge_cells(start_row=r_ret, start_column=2, end_row=r_ret, end_column=3)
+    ws.merge_cells(start_row=r_ret, start_column=COL_NO, end_row=r_ret, end_column=COL_LABEL)
+    c_ret = ws.cell(row=r_ret, column=COL_NO, value="退職者検証")
+    c_ret.fill = header_fill
+    c_ret.alignment = align_left
     current_row += 1
 
-    # Reason for deletion/change
-    r_reas = current_row
-    ws.cell(row=r_reas, column=2, value="削除・変更理由").fill = header_fill
-    ws.merge_cells(start_row=r_reas, start_column=2, end_row=r_reas, end_column=3)
+    # 削除・変更理由 (Merged B-C)
+    r_del = current_row
+    ws.merge_cells(start_row=r_del, start_column=COL_NO, end_row=r_del, end_column=COL_LABEL)
+    c_del = ws.cell(row=r_del, column=COL_NO, value="削除・変更理由")
+    c_del.fill = header_fill
+    c_del.alignment = align_left
 
-    # --- 5. Global Styling (Font & Borders) ---
+    # --- 4. Global Styling & Formatting ---
     max_row = current_row
     max_col = FIRST_USER_COL + len(users) - 1
 
-    for r in range(2, max_row + 1):
-        for c in range(2, max_col + 1):
+    # Apply Borders and Font to the whole table area
+    for r in range(HEADER_ROW_START, max_row + 1):
+        for c in range(COL_NO, max_col + 1):
             cell = ws.cell(row=r, column=c)
             cell.border = thin_border
+            # 日本語フォント対応
             cell.font = Font(name="MS PGothic", size=11)
 
-    # --- 6. Dimensions ---
+    # Column Widths
     ws.column_dimensions['A'].width = 2
-    ws.column_dimensions['B'].width = 8
-    ws.column_dimensions['C'].width = 25
+    ws.column_dimensions[get_column_letter(COL_NO)].width = 6   # B列 No.
+    ws.column_dimensions[get_column_letter(COL_LABEL)].width = 30 # C列 Permission名など
+    
     for idx in range(len(users)):
         col_letter = get_column_letter(FIRST_USER_COL + idx)
-        ws.column_dimensions[col_letter].width = 10
+        ws.column_dimensions[col_letter].width = 15 # ユーザー列
 
-    # ヘッダー固定設定は元コードを維持
-    ws.freeze_panes = ws.cell(row=FIRST_GROUP_ROW, column=FIRST_USER_COL)
+    # Freeze Panes (Permision start)
+    ws.freeze_panes = ws.cell(row=FIRST_PERM_ROW, column=FIRST_USER_COL)
 
     try:
         wb.save(filename)
-        print(f"Saved: {filename}")
+        print(f"Successfully saved Excel file: {filename}")
     except Exception as e:
         print(f"Failed to save Excel file: {e}")
 
@@ -284,9 +276,14 @@ def main():
         start_time = time()
         print("Task started...")
 
-        # Classic permission ベースのマッピングに変更
-        users, permissions, membership = map_user_permissions()
-        create_excel(users, permissions, membership)
+        # Classicデータの取得とマッピング
+        users, permissions, user_permission_map = map_classic_data()
+        
+        # Excel作成
+        if users:
+            create_excel(users, permissions, user_permission_map)
+        else:
+            print("No users found or failed to retrieve data.")
 
         end_time = time()
         elapsed_time = timedelta(seconds=int(end_time - start_time))
@@ -295,5 +292,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 ```
