@@ -192,7 +192,7 @@ def create_excel(data, max_policy_count):
     ws.title = sheetname
 
     # フォント設定 (MS PGothic, Boldなし)
-    font_style = Font(name="MS PGothic", size=11, bold=False)
+    font_style = Font(name="游ゴシック", size=11, bold=False)
 
     # 罫線設定
     thin_side = Side(style="thin")
@@ -204,55 +204,65 @@ def create_excel(data, max_policy_count):
     )
 
     # 配置設定
-    left_align = Alignment(horizontal="left", vertical="center", wrap_text=True) # Resourcesは見やすく左寄せ・折り返し
+    left_align = Alignment(horizontal="left", vertical="center", wrap_text=True)  # Resourcesは見やすく左寄せ・折り返し
 
     # --- ヘッダー作成 (Row 2) ---
     HEADER_ROW = 2
 
     # 固定ヘッダー
-    headers = ["User", "Category"]
+    headers = ["No.", "User", "Category"]
     # 動的ヘッダー (Policy 1, Policy 2...)
     for i in range(max_policy_count):
         headers.append(f"Policy {i+1}")
 
-    for col_idx, text in enumerate(headers, 1):
+    for col_idx, text in enumerate(headers, 2):
         cell = ws.cell(row=HEADER_ROW, column=col_idx, value=text)
         cell.font = font_style
         cell.border = thin_border
-        cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+        cell.alignment = Alignment(horizontal="center", vertical="center")
 
-    # --- データ出力 ---
+# --- データ出力 ---
     current_row = 3
 
-    for entry in data:
-        # 1ユーザーにつき2行使う
+    # enumerateで連番(idx)を取得
+    for idx, entry in enumerate(data, 1):
         row_roles = current_row
         row_resources = current_row + 1
 
-        # User列 (A列): 結合
-        cell_user = ws.cell(row=row_roles, column=1, value=entry["user"])
+        # 1. No.列 (B列: column=2)
+        cell_no = ws.cell(row=row_roles, column=2, value=idx)
+        cell_no.font = font_style
+        cell_no.alignment = Alignment(horizontal="center", vertical="center")
+        cell_no.border = thin_border
+
+        # No.列の結合
+        ws.merge_cells(start_row=row_roles, start_column=2, end_row=row_resources, end_column=2)
+        ws.cell(row=row_resources, column=2).border = thin_border
+
+        # 2. User列 (C列: column=3)
+        cell_user = ws.cell(row=row_roles, column=3, value=entry["user"])
         cell_user.font = font_style
         cell_user.alignment = Alignment(horizontal="left", vertical="center")
         cell_user.border = thin_border
 
-        # セル結合と結合後の罫線適用用ダミー書き込み
-        ws.merge_cells(start_row=row_roles, start_column=1, end_row=row_resources, end_column=1)
-        ws.cell(row=row_resources, column=1).border = thin_border
+        # User列の結合
+        ws.merge_cells(start_row=row_roles, start_column=3, end_row=row_resources, end_column=3)
+        ws.cell(row=row_resources, column=3).border = thin_border
 
-        # Category列 (B列)
-        cell_cat_roles = ws.cell(row=row_roles, column=2, value="Roles")
+        # 3. Category列 (D列: column=4)
+        cell_cat_roles = ws.cell(row=row_roles, column=4, value="Roles")
         cell_cat_roles.font = font_style
         cell_cat_roles.border = thin_border
         cell_cat_roles.alignment = Alignment(horizontal="left", vertical="center")
 
-        cell_cat_res = ws.cell(row=row_resources, column=2, value="Resources")
+        cell_cat_res = ws.cell(row=row_resources, column=4, value="Resources")
         cell_cat_res.font = font_style
         cell_cat_res.border = thin_border
         cell_cat_res.alignment = Alignment(horizontal="left", vertical="center")
 
-        # Policy列 (C列以降)
+        # 4. Policy列 (E列以降: column=5 + i)
         for i, policy in enumerate(entry["policies"]):
-            col_idx = 3 + i
+            col_idx = 5 + i
 
             # Roles書き込み
             cell_r = ws.cell(row=row_roles, column=col_idx, value=policy["roles"])
@@ -266,23 +276,27 @@ def create_excel(data, max_policy_count):
             cell_res.border = thin_border
             cell_res.alignment = left_align
 
-        # ポリシーがない残りの列にも罫線を引く
+        # 空白セルの罫線処理 (開始位置を5に変更)
         for i in range(len(entry["policies"]), max_policy_count):
-            col_idx = 3 + i
+            col_idx = 5 + i
             ws.cell(row=row_roles, column=col_idx).border = thin_border
             ws.cell(row=row_resources, column=col_idx).border = thin_border
 
         current_row += 2
 
-    # 列幅調整
-    ws.column_dimensions["A"].width = 25  # User
-    ws.column_dimensions["B"].width = 10  # Category
+# 列幅調整
+    ws.column_dimensions["A"].width = 2   # A列: 空列(狭く)
+    ws.column_dimensions["B"].width = 5   # B列: No.
+    ws.column_dimensions["C"].width = 25  # C列: User
+    ws.column_dimensions["D"].width = 15  # D列: Category
+
+    # Policy列 (E列以降)
     for i in range(max_policy_count):
-        col_letter = get_column_letter(3 + i)
-        ws.column_dimensions[col_letter].width = 40  # Policy columns
+        col_letter = get_column_letter(5 + i)  # 5 = E列
+        ws.column_dimensions[col_letter].width = 70
 
     # Freeze Panes
-    ws.freeze_panes = ws.cell(row=HEADER_ROW+1, column=3)
+    ws.freeze_panes = ws.cell(row=HEADER_ROW+1, column=5)
 
     try:
         wb.save(filename)
