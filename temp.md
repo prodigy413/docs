@@ -1,10 +1,11 @@
-```
+```yaml
 on:
   push:
     branches-ignore:
       - main
-    #paths:
-    #  - yaml/**
+    paths:
+      - yaml/yaml02/**
+      - python/**
 
 jobs:
   build:
@@ -29,21 +30,18 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_YAML: true
           VALIDATE_YAML_PRETTIER: true
-          #VALIDATE_ALL_CODEBASE: false
-          #YAML_FILE_NAME: .yamllint.yml
-          #FILTER_REGEX_INCLUDE: "yaml/yaml02/.*"
+          VALIDATE_ALL_CODEBASE: false
+          YAML_FILE_NAME: .yamllint.yml
+          FILTER_REGEX_INCLUDE: "yaml/yaml02/.*"
 
-      #- name: python lint
-      #  if: success() || failure()
-      #  uses: super-linter/super-linter@v8.3.0
-      #  env:
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #    #VALIDATE_YAML: true
-      #    VALIDATE_PYTHON_FLAKE8: true
-      #    VALIDATE_ALL_CODEBASE: false
-      #    #YAML_FILE_NAME: .yamllint.yml
-      #    FILTER_REGEX_INCLUDE: "python/.*"
-
+      - name: python lint
+        if: success() || failure()
+        uses: super-linter/super-linter@v8.3.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_PYTHON_FLAKE8: true
+          VALIDATE_ALL_CODEBASE: false
+          FILTER_REGEX_INCLUDE: "python/.*"
 ```
 
 ```python
