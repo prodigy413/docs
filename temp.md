@@ -1,3 +1,56 @@
+```
+# Logsエージェントのバージョンアップ
+
+## 概要
+
+- IBM Cloudでは、`2つ前のマイナーバージョン`までがサポート対象となるため、リリース情報を事前に確認し、サポート終了前にバージョンアップ対応を行う必要がある。<br>例）`v1.7.x`がリリースされた場合、`v1.4.x`はサポート対象外となる。
+
+## バージョンアップ作業の対応フロー
+
+```mermaid
+flowchart TD
+  A["リリース情報を確認"]
+  B["バージョンアップによる<br/>変更の影響確認"]
+  C["大きな変更がある場合<br/>→ AMSと調整"]
+  D["設定ファイル修正<br/>(logs-values.yaml)"]
+  E["エージェント更新<br/>(STG環境)"]
+  F["更新後の動作確認<br/>(MCK/AMS)"]
+  G["エージェント更新<br/>(本番環境)"]
+
+  A --> B
+  B --> D
+  B --> C
+  C --> D
+  D --> E --> F --> G
+```
+
+## リンク / 資料
+
+- リリース情報<br>[Release notes for the Logging agent](https://cloud.ibm.com/docs/cloud-logs?topic=cloud-logs-release-notes-agent&locale=en)
+- 過去の影響確認資料<br>[test](https://google.com)
+
+## Trusted Profile
+
+Logs Agentは以下Trusted Profileを利用してIBM Cloud Logsにログを転送する。
+
+- STG環境：`logs-agent-stg`
+  - Policy:
+    - Cluster: STG環境のOpenshift
+    - Namespace: ibm-observe
+    - Service Account: logs-agent
+  - Rule:
+    - Role: Sender
+    - Service: STG環境のIBM Cloud Logs
+- 本番環境：`logs-agent-prd`
+  - Policy:
+    - Cluster: 本番環境のOpenshift
+    - Namespace: ibm-observe
+    - Service Account: logs-agent
+  - Rule:
+    - Role: Sender
+    - Service: 本番環境のIBM Cloud Logs
+```
+
 ```yaml
 on:
   push:
