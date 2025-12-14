@@ -1,4 +1,30 @@
 ```
+# view only log field from specific pod
+source logs | filter $d.kubernetes.pod_name == 'logger-pod' | choose $d.log
+
+# pod info counts / limit 10
+source logs | filter $m.severity == INFO
+| groupby $d.kubernetes.pod_name agg count() as info_count | sort by info_count desc
+| limit 10
+
+
+[INPUT]
+    Name              tail
+    # ... (他の設定)
+    # 3MB以上を許容するため、4096k (4MB) に設定
+    Buffer_Max_Size   4096k
+    # 巨大な行をスキップせず処理する設定 (デフォルトはOnの場合が多いので確認)
+    Skip_Long_Lines   Off
+
+
+
+
+https://cloud.ibm.com/docs/cloud-logs?topic=cloud-logs-limits
+
+https://cloud.ibm.com/docs/cloud-logs?topic=cloud-logs-agent-helm-maxloglength
+```
+
+```
 python3 -m venv venv
 source venv/bin/activate
 pip install openpyxl
