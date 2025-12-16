@@ -1,4 +1,60 @@
 ```
+aws s3 sync s3://obi-test-bucket-20251216 ./test/ --dryrun
+aws s3 sync s3://obi-test-bucket-20251216 ./test/
+aws s3 ls s3://obi-test-bucket-20251216/test02/
+aws s3 ls s3://obi-test-bucket-20251216 --recursive
+
+curl https://icr.io/v2/instana/agent/tags/list | jq
+
+oc apply -f https://github.com/instana/instana-agent-operator/releases/latest/download/instana-agent-operator.yaml
+oc apply -f https://github.com/instana/instana-agent-operator/releases/download/v2.2.3/instana-agent-operator.yaml
+
+https://www.ibm.com/docs/en/instana-observability/1.0.310?topic=references-environment-variables
+
+
+apiVersion: instana.io/v1
+kind: InstanaAgent
+metadata:
+  name: instana-agent
+  namespace: instana-agent
+spec:
+  zone:
+    name: test-zone
+  cluster:
+      name: test-cluster
+  agent:
+    #keysSecret: instana-agent-key
+    key: ccccc
+    downloadKey: cccccc
+    endpointHost: ingress-blue-saas.instana.io
+    endpointPort: "443"
+    image:
+      #name: ""
+      tag: "1.309.1"
+    pod:
+      nodeSelector:
+        instana: enable
+      requests:
+        cpu: "0.5"
+        memory: "512Mi"
+      limits:
+        cpu: "1"
+        memory: "1Gi"
+    proxyHost: "172.21.145.240"
+    proxyPort: "3128"
+    proxyProtocol: "http"
+    #env:
+    #  INSTANA_AGENT_PROXY_HOST: "172.21.145.240"
+    #  INSTANA_AGENT_PROXY_PORT: "3128"
+    #  INSTANA_AGENT_PROXY_PROTOCOL: "http"
+    configuration_yaml: |
+      com.instana.ignore:
+        arguments:
+          - '/xxxxxxxx'
+
+```
+
+```
 # view only log field from specific pod
 source logs | filter $d.kubernetes.pod_name == 'logger-pod' | choose $d.log
 
