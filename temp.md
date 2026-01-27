@@ -27,3 +27,11 @@ aws s3 mv s3://xxxxxxxx/ s3://xxxxxxx/xxxxx/test/ \
 --include "index.*" \
 --dryrun
 ```
+
+```sql
+SELECT *
+FROM cloudfront_standard_logs
+WHERE "date" = DATE '2026-01-27'
+AND time BETWEEN '12:40:00' AND '12:42:59'
+LIMIT 100;
+```
