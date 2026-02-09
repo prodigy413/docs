@@ -1,37 +1,71 @@
-```
-CloudFront画面を開き、[Distributions]クリック > 該当CloudFrontを選択
-[Logging]タブをクリック > [Add] > [Amazon S3]クリック
+```terraform
+# aws s3api get-bucket-acl --bucket obi-test-bucket-20260209 --query "Owner.ID" --output text
+# aws s3api list-buckets --query "Owner.ID" --output text
 
-[Deliver to]: Amazon S3
-[Destination S3 bucket]: xxxxx.s3.amazonaws.comを選択し、後ろに/cloudfront-logs/を追加
+resource "aws_s3_bucket_acl" "example" {
+  acl    = null
+  bucket = "bucket"
+  region = "ap-northeast-1"
+  access_control_policy {
+    grant {
+      permission = "FULL_CONTROL"
+      grantee {
+        email_address = null
+        id            = "ididididididid"
+        type          = "CanonicalUser"
+        uri           = null
+      }
+    }
+    owner {
+      id = "ididididididid"
+    }
+  }
+}
 
-Additional Settings
+resource "aws_s3_bucket_request_payment_configuration" "example" {
+  bucket = "bucket"
+  payer  = "BucketOwner"
+  region = "ap-northeast-1"
+}
 
-Field selection: デフォルトのまま
-Partitioning
-/{DistributionId}/{yyyy}/{MM}/{dd}/{HH}
+resource "aws_s3_bucket_server_side_encryption_configuration" "example" {
+  bucket = "bucket"
+  region = "ap-northeast-1"
+  rule {
+    blocked_encryption_types = []
+    bucket_key_enabled       = true
+    apply_server_side_encryption_by_default {
+      kms_master_key_id = null
+      sse_algorithm     = "AES256"
+    }
+  }
+}
 
-Apache Hive compatibility
+resource "aws_s3_bucket_public_access_block" "example" {
+  block_public_acls       = true
+  block_public_policy     = true
+  bucket                  = "bucket"
+  ignore_public_acls      = true
+  region                  = "ap-northeast-1"
+  restrict_public_buckets = true
+  skip_destroy            = null
+}
 
-[Use a Hive-compatible file name format]: チェックしない（※デフォルト）
+resource "aws_s3_bucket_ownership_controls" "example" {
+  bucket = "bucket"
+  region = "ap-northeast-1"
+  rule {
+    object_ownership = "BucketOwnerEnforced"
+  }
+}
 
-[Output format]: W3C（※デフォルト）
-[Field delimiter]: \t（※デフォルト）
+resource "aws_s3_bucket_versioning" "example" {
+  bucket = "bucket"
+  mfa    = null
+  region = "ap-northeast-1"
+  versioning_configuration {
+    status = "Disabled"
+  }
+}
 
-[Submit]クリック
-確認
-
-aws s3 mv s3://xxxxxxxx/ s3://xxxxxxx/xxxxx/test/ \
---recursive \
---exclude "*.gz" \
---include "index.*" \
---dryrun
-```
-
-```sql
-SELECT *
-FROM cloudfront_standard_logs
-WHERE "date" = DATE '2026-01-27'
-AND time BETWEEN '12:40:00' AND '12:42:59'
-LIMIT 100;
 ```
