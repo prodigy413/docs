@@ -1,7 +1,3 @@
-```
-while true; do echo "$(date) $(curl -s https://xxxxxxxxtest.txt)" ; sleep 10 ; done
-```
-
 ```terraform
 # aws s3api get-bucket-acl --bucket obi-test-bucket-20260209 --query "Owner.ID" --output text
 # aws s3api list-buckets --query "Owner.ID" --output text
