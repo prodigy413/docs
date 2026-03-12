@@ -1,3 +1,97 @@
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "cloudfront:*",
+            "Resource": "arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "cloudfront:ListDistributions",
+            "Resource": "*"
+        }
+    ]
+}
+
+
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudfront:DescribeFunction",
+                "cloudfront:UpdateFunction",
+                "cloudfront:PublishFunction",
+                "cloudfront:DeleteFunction",
+                "cloudfront:TestFunction"
+            ],
+            "Resource": "arn:aws:cloudfront::123456789012:function/MyCustomFunction"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "cloudfront:ListFunctions",
+            "Resource": "*"
+        }
+    ]
+}
+
+
+
+
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SpecificDistributionFullLikeAccess",
+      "Effect": "Allow",
+      "Action": [
+        "cloudfront:GetDistribution",
+        "cloudfront:GetDistributionConfig",
+        "cloudfront:UpdateDistribution",
+        "cloudfront:DeleteDistribution",
+        "cloudfront:CreateInvalidation",
+        "cloudfront:ListInvalidations",
+        "cloudfront:CreateMonitoringSubscription",
+        "cloudfront:DeleteMonitoringSubscription",
+        "cloudfront:AllowVendedLogDeliveryForResource",
+        "cloudfront:TagResource",
+        "cloudfront:UntagResource"
+      ],
+      "Resource": "arn:aws:cloudfront::<AWSアカウントID>:distribution/<DistributionId>"
+    }
+  ]
+}
+
+
+
+
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SpecificFunctionFullLikeAccess",
+      "Effect": "Allow",
+      "Action": [
+        "cloudfront:GetFunction",
+        "cloudfront:DescribeFunction",
+        "cloudfront:UpdateFunction",
+        "cloudfront:DeleteFunction",
+        "cloudfront:PublishFunction",
+        "cloudfront:TestFunction"
+      ],
+      "Resource": "arn:aws:cloudfront::<AWSアカウントID>:function/<FunctionName>"
+    }
+  ]
+}
+```
+
 ```terraform
 # aws s3api get-bucket-acl --bucket obi-test-bucket-20260209 --query "Owner.ID" --output text
 # aws s3api list-buckets --query "Owner.ID" --output text
