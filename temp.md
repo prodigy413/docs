@@ -19,6 +19,66 @@ resource "aws_ssoadmin_permission_set" "permission_set" {
 aws sso login --sso-session my-sso --use-device-code
 
 
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowSSLRequestsOnly",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::aws-controltower-cloudtrail-logs-accound-id-ba4-bh4",
+                "arn:aws:s3:::aws-controltower-cloudtrail-logs-accound-id-ba4-bh4/*"
+            ],
+            "Condition": {
+                "Bool": {
+                    "aws:SecureTransport": "false"
+                }
+            }
+        },
+        {
+            "Sid": "AWSBucketPermissionsCheck",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "cloudtrail.amazonaws.com"
+            },
+            "Action": "s3:GetBucketAcl",
+            "Resource": "arn:aws:s3:::aws-controltower-cloudtrail-logs-accound-id-ba4-bh4"
+        },
+        {
+            "Sid": "AWSConfigBucketExistenceCheck",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "cloudtrail.amazonaws.com"
+            },
+            "Action": "s3:ListBucket",
+            "Resource": "arn:aws:s3:::aws-controltower-cloudtrail-logs-accound-id-ba4-bh4"
+        },
+        {
+            "Sid": "AWSBucketDeliveryForOrganizationTrail",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "cloudtrail.amazonaws.com"
+            },
+            "Action": "s3:PutObject",
+            "Resource": [
+                "arn:aws:s3:::aws-controltower-cloudtrail-logs-accound-id-ba4-bh4/organization-id/AWSLogs/accound-id-coludtrail-boss/*",
+                "arn:aws:s3:::aws-controltower-cloudtrail-logs-accound-id-ba4-bh4/organization-id/AWSLogs/organization-id/*"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "aws:SourceOrgID": "organization-id"
+                }
+            }
+        }
+    ]
+}
+
+
+
 ```
 
 # IAM Identity Center
