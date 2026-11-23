@@ -782,3 +782,39 @@ resource "aws_iam_role_policy_attachment" "terraform_deploy_admin" {
   policy_arn = "arn:${local.partition}:iam::aws:policy/AdministratorAccess"
 }
 ```
+
+```
+git -c credential.helper='!aws codecommit credential-helper $@' `
+    -c credential.UseHttpPath=true `
+    clone https://git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/test-repo
+
+
+git -c credential.helper= `
+    -c credential.helper='!aws codecommit credential-helper $@' `
+    -c credential.UseHttpPath=true `
+    clone https://git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/test-repo
+
+
+git config --local credential.helper '!aws codecommit credential-helper $@'
+git config --local credential.UseHttpPath true
+
+
+
+git config --local credential.helper ''
+git config --local --add credential.helper '!aws codecommit credential-helper $@'
+git config --local credential.UseHttpPath true
+
+git config --local --unset-all credential.helper
+git config --local --add credential.helper """"
+git config --local --add credential.helper '!aws codecommit credential-helper $@'
+git config --local credential.UseHttpPath true
+
+git config --local --unset-all credential.helper
+git config --local --add credential.helper ''
+git config --local --add credential.helper '!aws codecommit credential-helper $@'
+git config --local credential.UseHttpPath true
+
+git config --local user.email "obi@test.local"
+git config --local user.name "obi"
+
+```
